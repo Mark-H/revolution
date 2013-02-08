@@ -265,7 +265,7 @@ html #modx-top-menu ul.modx-subnav li a:hover{
 }
 .dashboard-block {
     float: left;
-    margin: 6px 1% 6px 0;
+    margin: 0 1% 12px 0;
 }
 
 .dashboard-block li {

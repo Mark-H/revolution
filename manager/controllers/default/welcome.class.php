@@ -31,14 +31,6 @@
      * @return void
      */
     public function loadCustomCssJs() {
-        $this->addHtml('<script type="text/javascript">
-Ext.onReady(function() {
-    MODx.load({
-        xtype: "modx-page-welcome"
-        ,dashboard: '.$this->modx->toJSON($this->dashboard->toArray()).'
-    });
-});
-</script>');
         if ($this->showWelcomeScreen) {
             $url = $this->modx->getOption('welcome_screen_url',null,'http://misc.modx.com/revolution/welcome.20.html');
             $this->addHtml('<script type="text/javascript">
