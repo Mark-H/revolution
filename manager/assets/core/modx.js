@@ -7,9 +7,6 @@
  */
 var MODX = {};
 (function(MODX, $){
-    var $modxContainer = $('#modx-container'),
-        $modxTop = $('#modx-top'),
-        $window = $(window);
 
     $.extend(MODX, {
         jQuery: $,
@@ -22,9 +19,10 @@ var MODX = {};
              * Add a listener to resize the main container when the
              * window is resized.
              */
+
             $(window).resize(function() {
                 MODX.setContainerHeight()
-            });
+            }).resize();
 
             /**
              * Prepare $.ajax to make sure the required modAuth header is set in
@@ -105,10 +103,10 @@ var MODX = {};
         modules: {},
 
         setContainerHeight: function() {
-            var windowHeight = $window.outerHeight();
-            var topHeight = $modxTop.outerHeight();
+            var windowHeight = $(window).outerHeight();
+            var topHeight = $('#modx-top').outerHeight();
             var containerHeight = windowHeight - topHeight;
-            $modxContainer.css('height', containerHeight);
+            $('#modx-container').css('height', containerHeight);
         }
     });
 })( MODX, jQuery );

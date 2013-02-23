@@ -33,6 +33,7 @@
     <script src="{$_config.manager_url}assets/core/modx.js" type="text/javascript"></script>
     <script src="{$_config.manager_url}assets/core/modx.state.js" type="text/javascript"></script>
     <script src="{$_config.manager_url}assets/kendoui/src/js/kendo.web.js" type="text/javascript"></script>
+    <script src="{$_config.manager_url}assets/easytabs/jquery.easytabs.js" type="text/javascript"></script>
     <script src="{$_config.manager_url}assets/core/modules/base.js" type="text/javascript"></script>
     <script src="{$_config.manager_url}assets/core/modules/tabs.js" type="text/javascript"></script>
     <script src="{$_config.manager_url}assets/core/modules/toggle.js" type="text/javascript"></script>
@@ -86,51 +87,53 @@
 <div id="modx-container">
 
     <div id="modx-sidebar">
-        <div id="modx-sidebar-tabs" data-role="tabs" data-stateful="true">
-            <ul>
-                <li>{$_lang.resources}</li>
-                <li>{$_lang.elements}</li>
-                <li>{$_lang.files}</li>
+        <div id="modx-sidebar-tabs" class="modx-tabs-container" data-role="modx-tabs" data-stateful="true" data-animate="false" data-updateHash="false">
+            <ul class="modx-tabs">
+                <li id="modx-tab-sidebar-resources"><a href="#modx-sidebar-resources">{$_lang.resources}</a></li>
+                <li id="modx-tab-sidebar-elements"><a href="#modx-sidebar-elements">{$_lang.elements}</a></li>
+                <li id="modx-tab-sidebar-files"><a href="#modx-sidebar-files">{$_lang.files}</a></li>
             </ul>
 
-            <!-- Resources tab -->
-            <div>
-                <ul>
-                    <li>Home</li>
-                    <li>About us
-                        <ul>
-                            <li>Services</li>
-                            <li>Vision &amp; Values</li>
-                            <li>Team</li>
-                        </ul>
-                    </li>
-                    <li>Contact</li>
-                </ul>
-            </div>
+            <div class="modx-tabs-content">
+                <!-- Resources tab -->
+                <div id="modx-sidebar-resources">
+                    <ul>
+                        <li>Home</li>
+                        <li>About us
+                            <ul>
+                                <li>Services</li>
+                                <li>Vision &amp; Values</li>
+                                <li>Team</li>
+                            </ul>
+                        </li>
+                        <li>Contact</li>
+                    </ul>
+                </div>
 
-            <!-- Elements tab -->
-            <div>
-                <ul>
-                    <li>{$_lang.templates}</li>
-                    <li>{$_lang.template_variables}</li>
-                    <li>{$_lang.chunks}</li>
-                    <li>{$_lang.snippets}</li>
-                    <li>{$_lang.plugins}</li>
-                    <li>{$_lang.categories}</li>
-                </ul>
-            </div>
+                <!-- Elements tab -->
+                <div id="modx-sidebar-elements">
+                    <ul>
+                        <li>{$_lang.templates}</li>
+                        <li>{$_lang.template_variables}</li>
+                        <li>{$_lang.chunks}</li>
+                        <li>{$_lang.snippets}</li>
+                        <li>{$_lang.plugins}</li>
+                        <li>{$_lang.categories}</li>
+                    </ul>
+                </div>
 
-            <!-- Files  tab -->
-            <div>
-                <ul>
-                    <li>assets/</li>
-                    <li>connectors/</li>
-                    <li>core/</li>
-                    <li>manager/</li>
-                    <li>.htaccess</li>
-                    <li>config.core.php</li>
-                    <li>index.php</li>
-                </ul>
+                <!-- Files  tab -->
+                <div id="modx-sidebar-files">
+                    <ul>
+                        <li>assets/</li>
+                        <li>connectors/</li>
+                        <li>core/</li>
+                        <li>manager/</li>
+                        <li>.htaccess</li>
+                        <li>config.core.php</li>
+                        <li>index.php</li>
+                    </ul>
+                </div>
             </div>
 
         </div>

@@ -7,10 +7,44 @@
     var $ = MODX.jQuery;
     MODX.modules.Tabs = {};
     $.extend(MODX.modules.Tabs, MODX.modules.Base, {
-        selector: 'div[data-role=tabs]',
+        selector: 'div[data-role=modx-tabs]',
         defaultOptions: {
             stateful: true,
-            statefulDefault: 0
+            events: {
+                before: [],
+                midTransition: [],
+                after: []
+            },
+
+            /**
+             * Defaults inherited from jQuery easytabs
+             * For descriptions of each options, see http://os.alfajango.com/easytabs/#configuration
+             */
+            animate: false, // Changed default from true to false
+            panelActiveClass: "active",
+            tabActiveClass: "active",
+            defaultTab: "li:first-child",
+            animationSpeed: "normal",
+            tabs: "> ul > li",
+            updateHash: false, // Changed default from true to false
+            cycle: false,
+            collapsible: false,
+            collapsedClass: "collapsed",
+            collapsedByDefault: true,
+            uiTabs: false,
+            transitionIn: 'fadeIn',
+            transitionOut: 'fadeOut',
+            transitionInEasing: 'swing',
+            transitionOutEasing: 'swing',
+            transitionCollapse: 'slideUp',
+            transitionUncollapse: 'slideDown',
+            transitionCollapseEasing: 'swing',
+            transitionUncollapseEasing: 'swing',
+            containerClass: "",
+            tabsClass: "",
+            tabClass: "",
+            panelClass: "",
+            cache: true
         },
         iterate: function (element, options) {
             /**
@@ -22,23 +56,28 @@
             if (options.stateful && (id.length > 0)) {
                 /* Get last active tab */
                 var active = MODX.State.get(id);
-                if (active == undefined) {
-                    active = options.statefulDefault;
+                console.log(active);
+                if (active != undefined) {
+                    options.defaultTab = 'li#'+active;
                 }
+                console.log(options.defaultTab);
 
-                /**
-                 * Add the k-state-active class to the active tab. Kendo TabStrip
-                 * requires this to show a tab when rendering the page.
-                 */
-                var activeTab = element.find('ul > li')[active];
-                $(activeTab).addClass('k-state-active');
-
-                options.activate = function(e) {
-                    MODX.State.set(id, $(e.item).index());
-                };
+                options.events.after.push(function(event, $clicked, $targetPanel, settings) {
+                    MODX.State.set(id, $clicked.parent('li').attr('id'));
+                });
             }
 
-            element.kendoTabStrip(options);
+            element.easytabs(options);
+
+            $.each(options.events, function(eventName, functions) {
+                //console.log(eventName, functions);
+                $.each(functions, function(index, fn) {
+                    element.on('easytabs:' + eventName, fn);
+                    //console.log(index, fn);
+                });
+            });
+
+            //element.kendoTabStrip(options);
         }
     });
 })( MODX );
