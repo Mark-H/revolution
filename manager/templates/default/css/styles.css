@@ -73,13 +73,13 @@ input::-moz-focus-inner {
 #modx-sidebar, #modx-content {
   overflow-y: auto;
   height: 100%;
-  padding: 10px;
+  padding: 10px 0;
   margin-top: 10px; }
 
 /* sidebar */
 #modx-sidebar {
   float: left;
-  width: 250px;
+  width: 270px;
   border: 1px solid orange; }
 
 #modx-content {
@@ -449,37 +449,43 @@ input[type=date]:focus {
 
 .modx-tabs {
   margin: 0;
+  margin-bottom: -2px;
   padding: 0; }
-
-.modx-tabs li {
-  display: inline-block;
-  zoom: 1;
-  *display: inline;
-  background: #eee;
-  border: solid 1px #999999;
-  border-bottom: none;
-  -moz-border-radius: 4px 4px 0 0;
-  -webkit-border-radius: 4px 4px 0 0; }
-
-.modx-tabs li a {
-  font-size: 14px;
-  line-height: 2em;
-  display: block;
-  padding: 0 10px;
-  outline: none; }
-
-.modx-tabs li a:hover {
-  text-decoration: underline; }
-
-.modx-tabs li.active {
-  background: #fff;
-  padding-top: 6px;
-  position: relative;
-  top: 1px;
-  border-color: #666; }
-
-.modx-tabs li a.active {
-  font-weight: bold; }
+  .modx-tabs li {
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    -khtml-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+    border-color: #658F1A;
+    border-style: solid solid none;
+    border-width: 1px 1px 0;
+    margin: 1px -2px 1px 0;
+    padding: 2px 8px;
+    background: url(../images/modx-theme/tabs/tab-bg.svg) #658f1a;
+    background: -moz-linear-gradient(center bottom, #658f1a 0%, #8baf4c 100%) repeat scroll 0 0 transparent;
+    background: -webkit-linear-gradient(center bottom, #658f1a 0%, #8baf4c 100%);
+    background: -o-linear-gradient(center bottom, #658f1a 0%, #8baf4c 100%);
+    background: -ms-linear-gradient(center bottom, #658f1a 0%, #8baf4c 100%); }
+    .modx-tabs li a {
+      line-height: 30px;
+      outline: none;
+      text-decoration: none;
+      color: #FFFFFF;
+      padding: 4px 0 5px;
+      text-shadow: 0 -1px 0 #3d5f00; }
+      .modx-tabs li a.active {
+        color: #666666;
+        text-shadow: 0 1px 0 #fafafa; }
+    .modx-tabs li.active {
+      background: white none !important;
+      overflow: hidden;
+      border: 1px solid #999999;
+      border-bottom: 0 none;
+      text-shadow: none;
+      filter: none; }
 
 .modx-tabs-content {
   background: #fff;

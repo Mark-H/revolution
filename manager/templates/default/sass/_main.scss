@@ -92,14 +92,14 @@ input::-moz-focus-inner {
 #modx-sidebar, #modx-content {
   overflow-y: auto;
   height: 100%;
-  padding: 10px;
+  padding: 10px 0;
   margin-top: 10px;
 }
 
 /* sidebar */
 #modx-sidebar {
   float: left;
-  width: 250px;
+  width: 270px;
   border: 1px solid orange;
 }
 
