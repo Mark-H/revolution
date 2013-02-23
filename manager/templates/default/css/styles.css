@@ -79,12 +79,10 @@ input::-moz-focus-inner {
 /* sidebar */
 #modx-sidebar {
   float: left;
-  width: 270px;
-  border: 1px solid orange; }
+  width: 270px; }
 
 #modx-content {
-  margin-left: 282px;
-  border: 1px solid red; }
+  margin-left: 282px; }
 
 /** Nav bar */
 #modx-top {

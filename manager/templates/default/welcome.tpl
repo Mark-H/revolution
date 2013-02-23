@@ -1,4 +1,4 @@
-<div id="modx-panel-welcome-div"></div>
+<h2>{$_config.site_name}</h2>
 
 <div id="modx-dashboard" class="dashboard">
 {$dashboard}
