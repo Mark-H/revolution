@@ -16,13 +16,8 @@
     <link rel="stylesheet" type="text/css"
           href="{$_config.manager_url}min/index.php?f={$_config.manager_url}templates/default/css/structure.css,{$_config.manager_url}templates/default/css/forms.css,{$_config.manager_url}templates/default/css/style.css,{$_config.manager_url}templates/default/css/login.css"/>
     {else}
-    <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/structure.css"/>
-    <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/forms.css"/>
-    <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/styles.css"/>
     <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/login.css"/>
-
-    <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/kendoui/src/styles/kendo.common.css"/>
-    <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/kendoui/src/styles/kendo.default.css"/>
 {/if}
 
 {if $_config.compress_js}
