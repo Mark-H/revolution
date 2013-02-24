@@ -18,11 +18,10 @@ img, a img {
 }
 
 hr {
-  color: #a1b7c4;
-  background-color: #a1b7c4;
+  border: none;
   height: 1px;
-  border: 0;
-  margin: 20px;
+  background: #e4e4e4;
+  margin: 0;
 }
 
 textarea {
@@ -87,6 +86,7 @@ input::-moz-focus-inner {
   height: 100%;
   overflow: hidden;
   padding: 0 10px;
+  background: url(../images/restyle/contentArea_bg.png) repeat-x 100% 0 !important;
 }
 
 #modx-sidebar, #modx-content {
@@ -410,6 +410,10 @@ html #modx-top-menu ul.modx-subnav li a:hover {
   font-size: 15px;
   font-weight: bold;
   padding: 20px 10px 60px;
+}
+.full {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /**

@@ -15,11 +15,10 @@ img, a img {
   margin: 0; }
 
 hr {
-  color: #a1b7c4;
-  background-color: #a1b7c4;
+  border: none;
   height: 1px;
-  border: 0;
-  margin: 20px; }
+  background: #e4e4e4;
+  margin: 0; }
 
 textarea {
   overflow: auto; }
@@ -68,7 +67,8 @@ input::-moz-focus-inner {
 #modx-container {
   height: 100%;
   overflow: hidden;
-  padding: 0 10px; }
+  padding: 0 10px;
+  background: url(../images/restyle/contentArea_bg.png) repeat-x 100% 0 !important; }
 
 #modx-sidebar, #modx-content {
   overflow-y: auto;
@@ -328,6 +328,10 @@ html #modx-top-menu ul.modx-subnav li a:hover {
   font-weight: bold;
   padding: 20px 10px 60px; }
 
+.full {
+  width: 100%;
+  box-sizing: border-box; }
+
 /**
  * Dashboard styles
  */
@@ -468,26 +472,33 @@ input[type=date]:focus {
     background: -o-linear-gradient(center bottom, #658f1a 0%, #8baf4c 100%);
     background: -ms-linear-gradient(center bottom, #658f1a 0%, #8baf4c 100%); }
     .modx-tabs li a {
-      line-height: 30px;
+      line-height: 27px;
       outline: none;
       text-decoration: none;
       color: #FFFFFF;
       padding: 4px 0 5px;
-      text-shadow: 0 -1px 0 #3d5f00; }
+      text-shadow: 0 -1px 0 #3d5f00;
+      font-size: 12px; }
       .modx-tabs li a.active {
         color: #666666;
         text-shadow: 0 1px 0 #fafafa; }
     .modx-tabs li.active {
-      background: white none !important;
+      background: white none;
       overflow: hidden;
       border: 1px solid #999999;
       border-bottom: 0 none;
       text-shadow: none;
       filter: none; }
+      #modx-sidebar .modx-tabs li.active {
+        background-color: #fbfbfb; }
 
 .modx-tabs-content {
-  background: #fff;
-  border: solid #666666 1px;
-  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #999999;
   -moz-border-radius: 0 4px 4px 4px;
-  -webkit-border-radius: 0 4px 4px 4px; }
+  -webkit-border-radius: 0 4px 4px 4px;
+  border-radius: 0 4px 4px 4px; }
+  #modx-sidebar .modx-tabs-content {
+    background-color: #fbfbfb; }
+  .modx-tabs-content .inner {
+    padding: 6px; }

@@ -6,7 +6,7 @@
 (function( MODX ){
     var $ = MODX.jQuery;
     MODX.modules.Tabs = {};
-    $.extend(MODX.modules.Tabs, MODX.modules.Base, {
+    $.extend(true, MODX.modules.Tabs, MODX.modules.Base, {
         selector: 'div[data-role=modx-tabs]',
         defaultOptions: {
             stateful: true,
@@ -56,11 +56,9 @@
             if (options.stateful && (id.length > 0)) {
                 /* Get last active tab */
                 var active = MODX.State.get(id);
-                console.log(active);
                 if (active != undefined) {
                     options.defaultTab = 'li#'+active;
                 }
-                console.log(options.defaultTab);
 
                 options.events.after.push(function(event, $clicked, $targetPanel, settings) {
                     MODX.State.set(id, $clicked.parent('li').attr('id'));
@@ -70,14 +68,10 @@
             element.easytabs(options);
 
             $.each(options.events, function(eventName, functions) {
-                //console.log(eventName, functions);
                 $.each(functions, function(index, fn) {
                     element.on('easytabs:' + eventName, fn);
-                    //console.log(index, fn);
                 });
             });
-
-            //element.kendoTabStrip(options);
         }
     });
 })( MODX );

@@ -26,12 +26,13 @@
     //filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#8BAF4C,endColorstr=#658F1A,GradientType=0);
 
     a {
-      line-height: 30px;
+      line-height: 27px;
       outline: none;
       text-decoration: none;
       color: #FFFFFF;
       padding: 4px 0 5px;
       text-shadow: 0 -1px 0 #3D5F00;
+      font-size: 12px;
 
       &:hover {
 
@@ -44,20 +45,32 @@
     }
 
     &.active {
-      background: white none !important;
+      background: white none;
       overflow:hidden;
       border: 1px solid #999;
       border-bottom: 0 none;
       text-shadow: none;
       filter: none;
+
+      #modx-sidebar & {
+        background-color: #fbfbfb;
+      }
     }
   }
 }
 
 .modx-tabs-content {
-  background: #fff;
-  border: solid #666 1px;
-  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #999;
   -moz-border-radius: 0 4px 4px 4px;
   -webkit-border-radius: 0 4px 4px 4px;
+  border-radius: 0 4px 4px 4px;
+
+  #modx-sidebar & {
+    background-color: #fbfbfb;
+  }
+
+  .inner {
+    padding: 6px;
+  }
 }

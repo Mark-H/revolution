@@ -34,6 +34,7 @@
     <script src="{$_config.manager_url}assets/core/modules/base.js" type="text/javascript"></script>
     <script src="{$_config.manager_url}assets/core/modules/tabs.js" type="text/javascript"></script>
     <script src="{$_config.manager_url}assets/core/modules/toggle.js" type="text/javascript"></script>
+    <script src="{$_config.manager_url}assets/core/modules/tree.js" type="text/javascript"></script>
 {/if}
 
     <script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|strip_tags}"
@@ -94,17 +95,33 @@
             <div class="modx-tabs-content">
                 <!-- Resources tab -->
                 <div id="modx-sidebar-resources">
-                    <ul>
-                        <li>Home</li>
-                        <li>About us
-                            <ul>
-                                <li>Services</li>
-                                <li>Vision &amp; Values</li>
-                                <li>Team</li>
-                            </ul>
-                        </li>
-                        <li>Contact</li>
-                    </ul>
+                    <div class="inner">
+                        <button>Foo!</button>
+                        <button>Bar!</button>
+                        <button>Lalala!</button>
+
+                        <input type="text" id="modx-sidebar-resources-search" placeholder="{$_lang.search}..." class="full">
+                    </div>
+
+                    <hr />
+
+                    <div class="inner">
+
+                        <div id="modx-sidebar-tree-resources" data-role="modx-tree-resources"></div>
+
+
+                        <!--<ul>
+                            <li>Home</li>
+                            <li>About us
+                                <ul>
+                                    <li>Services</li>
+                                    <li>Vision &amp; Values</li>
+                                    <li>Team</li>
+                                </ul>
+                            </li>
+                            <li>Contact</li>
+                        </ul>-->
+                    </div>
                 </div>
 
                 <!-- Elements tab -->

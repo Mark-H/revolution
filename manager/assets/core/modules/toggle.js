@@ -6,7 +6,7 @@
 (function( MODX ){
     var $ = MODX.jQuery;
     MODX.modules.Toggle = {};
-    $.extend(MODX.modules.Toggle, MODX.modules.Base, {
+    $.extend(true, MODX.modules.Toggle, MODX.modules.Base, {
         selector: '[data-role=toggle]',
         defaultOptions: {
             hideTrigger: false,
