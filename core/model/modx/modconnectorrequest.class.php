@@ -63,6 +63,16 @@ class modConnectorRequest extends modManagerRequest {
         }
         $options['action'] = strtolower($options['action']);
 
+        if (isset($_REQUEST['namespace']) && !isset($options['processors_path'])) {
+            $ns = $_REQUEST['namespace'];
+            $namespaces = $this->modx->call('modNamespace', 'loadCache', array(&$this->modx));
+            if (isset($namespaces[$ns])) {
+                $path = $namespaces[$ns]['path'];
+                $path .= 'processors/';
+                $options['processors_path'] = $path;
+            }
+        }
+
         $this->loadErrorHandler();
 
         /* Cleanup action and store. */
