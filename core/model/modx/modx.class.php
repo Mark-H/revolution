@@ -1892,7 +1892,7 @@ class modX extends xPDO {
     public function log($level, $msg, $target= '', $def= '', $file= '', $line= '') {
         $logger = $this->_getLogger(); // @todo replace with dependency injection container
 
-        $context = [];
+        $context = array();
         if (!empty($target)) {
             $context['target'] = $target;
         }
