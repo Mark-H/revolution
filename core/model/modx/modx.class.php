@@ -30,6 +30,9 @@ use xPDO\xPDO;
 use xPDO\xPDOException;
 use xPDO\Cache\xPDOCacheManager;
 use xPDO\Om\xPDOObject;
+use Psr\Log\LogLevel;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 class_alias('xPDO\xPDO', 'xPDO');
 
@@ -1905,47 +1908,47 @@ class modX extends xPDO {
 
         switch ($level) {
             case 600:
-            case \Psr\Log\LogLevel::EMERGENCY:
+            case LogLevel::EMERGENCY:
                 $logger->emergency($msg, $context);
                 break;
 
             case 550:
-            case \Psr\Log\LogLevel::ALERT:
+            case LogLevel::ALERT:
                 $logger->alert($msg, $context);
                 break;
 
             case xPDO::LOG_LEVEL_FATAL:
             case 500:
-            case \Psr\Log\LogLevel::CRITICAL:
+            case LogLevel::CRITICAL:
                 $logger->critical($msg, $context);
                 break;
 
             case xPDO::LOG_LEVEL_ERROR:
             case 400:
-            case \Psr\Log\LogLevel::ERROR:
+            case LogLevel::ERROR:
                 $logger->error($msg, $context);
                 break;
 
             case xPDO::LOG_LEVEL_WARN:
             case 300:
-            case \Psr\Log\LogLevel::WARNING:
+            case LogLevel::WARNING:
                 $logger->warning($msg, $context);
                 break;
 
             case 250:
-            case \Psr\Log\LogLevel::NOTICE:
+            case LogLevel::NOTICE:
                 $logger->notice($msg, $context);
                 break;
 
             case xPDO::LOG_LEVEL_INFO:
             case 200:
-            case \Psr\Log\LogLevel::INFO:
+            case LogLevel::INFO:
                 $logger->info($msg, $context);
                 break;
 
             case xPDO::LOG_LEVEL_DEBUG:
             case 100:
-            case \Psr\Log\LogLevel::DEBUG:
+            case LogLevel::DEBUG:
                 $logger->debug($msg, $context);
                 break;
         }
@@ -1957,7 +1960,7 @@ class modX extends xPDO {
      */
     protected function _getLogger() {
         if (!$this->_logger) {
-            $this->_logger = new \Monolog\Logger('modx');
+            $this->_logger = new Logger('modx');
 
             $logFile = $this->getOption(xPDO::OPT_CACHE_PATH) . 'logs/error.log';
 
@@ -1965,26 +1968,26 @@ class modX extends xPDO {
             // Translate xPDO log levels into the proper log level for the PSR3 compatible logger.
             switch ($logLevel) {
                 case xPDO::LOG_LEVEL_FATAL:
-                    $logLevel = \Psr\Log\LogLevel::CRITICAL;
+                    $logLevel = LogLevel::CRITICAL;
                     break;
 
                 case xPDO::LOG_LEVEL_ERROR:
-                    $logLevel = \Psr\Log\LogLevel::ERROR;
+                    $logLevel = LogLevel::ERROR;
                     break;
 
                 case xPDO::LOG_LEVEL_WARN:
-                    $logLevel = \Psr\Log\LogLevel::WARNING;
+                    $logLevel = LogLevel::WARNING;
                     break;
 
                 case xPDO::LOG_LEVEL_INFO:
-                    $logLevel = \Psr\Log\LogLevel::INFO;
+                    $logLevel = LogLevel::INFO;
                     break;
 
                 case xPDO::LOG_LEVEL_DEBUG:
-                    $logLevel = \Psr\Log\LogLevel::DEBUG;
+                    $logLevel = LogLevel::DEBUG;
                     break;
             }
-            $this->_logger->pushHandler(new \Monolog\Handler\StreamHandler($logFile, $logLevel));
+            $this->_logger->pushHandler(new StreamHandler($logFile, $logLevel));
         }
 
         return $this->_logger;
