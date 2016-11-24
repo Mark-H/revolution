@@ -282,6 +282,11 @@ class modX extends xPDO {
     public $documentOutput= null;
 
     /**
+     * @var Psr\Log\LoggerInterface
+     */
+    protected $_logger;
+
+    /**
      * Harden the environment against common security flaws.
      *
      * @static
@@ -1881,7 +1886,111 @@ class modX extends xPDO {
         return $state;
     }
 
+    public function log($level, $msg, $target= '', $def= '', $file= '', $line= '') {
+        $logger = $this->_getLogger(); // @todo replace with dependency injection container
+
+        $context = [];
+        if (!empty($target)) {
+            $context['target'] = $target;
+        }
+        if (!empty($def)) {
+            $context['def'] = $def;
+        }
+        if (!empty($file)) {
+            $context['file'] = $file;
+        }
+        if (!empty($line)) {
+            $context['line'] = $line;
+        }
+
+        switch ($level) {
+            case 600:
+            case \Psr\Log\LogLevel::EMERGENCY:
+                $logger->emergency($msg, $context);
+                break;
+
+            case 550:
+            case \Psr\Log\LogLevel::ALERT:
+                $logger->alert($msg, $context);
+                break;
+
+            case xPDO::LOG_LEVEL_FATAL:
+            case 500:
+            case \Psr\Log\LogLevel::CRITICAL:
+                $logger->critical($msg, $context);
+                break;
+
+            case xPDO::LOG_LEVEL_ERROR:
+            case 400:
+            case \Psr\Log\LogLevel::ERROR:
+                $logger->error($msg, $context);
+                break;
+
+            case xPDO::LOG_LEVEL_WARN:
+            case 300:
+            case \Psr\Log\LogLevel::WARNING:
+                $logger->warning($msg, $context);
+                break;
+
+            case 250:
+            case \Psr\Log\LogLevel::NOTICE:
+                $logger->notice($msg, $context);
+                break;
+
+            case xPDO::LOG_LEVEL_INFO:
+            case 200:
+            case \Psr\Log\LogLevel::INFO:
+                $logger->info($msg, $context);
+                break;
+
+            case xPDO::LOG_LEVEL_DEBUG:
+            case 100:
+            case \Psr\Log\LogLevel::DEBUG:
+                $logger->debug($msg, $context);
+                break;
+        }
+    }
+
     /**
+     * @todo Refactor this, or replace entirely, with dependency injection container
+     * @return Psr\Log\LoggerInterface
+     */
+    protected function _getLogger() {
+        if (!$this->_logger) {
+            $this->_logger = new \Monolog\Logger('modx');
+
+            $logFile = $this->getOption(xPDO::OPT_CACHE_PATH) . 'logs/error.log';
+
+            $logLevel = $this->getLogLevel();
+            // Translate xPDO log levels into the proper log level for the PSR3 compatible logger.
+            switch ($logLevel) {
+                case xPDO::LOG_LEVEL_FATAL:
+                    $logLevel = \Psr\Log\LogLevel::CRITICAL;
+                    break;
+
+                case xPDO::LOG_LEVEL_ERROR:
+                    $logLevel = \Psr\Log\LogLevel::ERROR;
+                    break;
+
+                case xPDO::LOG_LEVEL_WARN:
+                    $logLevel = \Psr\Log\LogLevel::WARNING;
+                    break;
+
+                case xPDO::LOG_LEVEL_INFO:
+                    $logLevel = \Psr\Log\LogLevel::INFO;
+                    break;
+
+                case xPDO::LOG_LEVEL_DEBUG:
+                    $logLevel = \Psr\Log\LogLevel::DEBUG;
+                    break;
+            }
+            $this->_logger->pushHandler(new \Monolog\Handler\StreamHandler($logFile, $logLevel));
+        }
+
+        return $this->_logger;
+    }
+
+        /**
      * Logs a manager action.
      *
      * @param string $action The action to pull from the lexicon module.
@@ -1896,7 +2005,7 @@ class modX extends xPDO {
                 $userId = $this->user->get('id');
         	}
         }
-        
+
         $ml = $this->newObject('modManagerLog');
         $ml->set('user', (integer) $userId);
         $ml->set('occurred', strftime('%Y-%m-%d %H:%M:%S'));
