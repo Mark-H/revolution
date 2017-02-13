@@ -280,7 +280,6 @@ class modX extends xPDO {
      * @static
      */
     public static function protect() {
-        if (isset ($_SERVER['QUERY_STRING']) && strpos(urldecode($_SERVER['QUERY_STRING']), chr(0)) !== false) die();
         if (@ ini_get('register_globals') && isset ($_REQUEST)) {
             while (list($key, $value)= each($_REQUEST)) {
                 $GLOBALS[$key] = null;
@@ -310,6 +309,9 @@ class modX extends xPDO {
             if (is_array($value) && $depth > 0) {
                 modX :: sanitize($value, $patterns, $depth-1);
             } elseif (is_string($value)) {
+                // Clean up zero byte (%00) values
+                $value = str_replace(chr(0), '', $value);
+
                 if (!empty($patterns)) {
                     $iteration = 1;
                     $nesting = ((integer) $nesting ? (integer) $nesting : 10);
