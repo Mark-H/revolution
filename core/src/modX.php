@@ -496,11 +496,13 @@ class modX extends App
                     array_unshift($data[xPDO::OPT_CONNECTIONS], $primaryConnection);
                     if (!empty($site_id)) $this->site_id = $site_id;
                     if (!empty($uuid)) $this->uuid = $uuid;
+
                 } else {
                     throw new xPDOException("Could not load required config data.");
                 }
                 $config->replace($data);
-                return xPDO::getInstance(null, $this->getContainer());
+
+                return xPDO::getInstance(null, $config->all());
             },
 
             'cacheManager' => function(ContainerInterface $c) {
@@ -621,6 +623,10 @@ class modX extends App
      */
     public function getCacheManager() {
         if ($this->cacheManager === null) {
+            // Because MODX used to extend XPDO, XPDO had a reference to the active cacheManager from the moment
+            // it was created. As we no longer extend XPDO we need to set the reference to this manager
+            // here. This does create a type of circular dependency, but it works.
+            $this->getContainer()->get('xpdo')->cacheManager = $this->getContainer()->get('cacheManager');
             $this->cacheManager = $this->getContainer()->get('cacheManager');
         }
 
@@ -2464,8 +2470,8 @@ class modX extends App
      */
     protected function _loadConfig() {
         $this->config = $this->_config;
-
         $this->getCacheManager();
+
         $config = $this->cacheManager->get('config', array(
             xPDO::OPT_CACHE_KEY => $this->getOption('cache_system_settings_key', null, 'system_settings'),
             xPDO::OPT_CACHE_HANDLER => $this->getOption('cache_system_settings_handler', null, $this->getOption(xPDO::OPT_CACHE_HANDLER)),
