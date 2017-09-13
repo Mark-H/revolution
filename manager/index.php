@@ -7,6 +7,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+use MODX\modX;
+
 /**
  * Initializes the modx manager
  *
@@ -15,6 +18,8 @@
  */
 @include dirname(__FILE__) . '/config.core.php';
 if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(__DIR__) . '/core/');
+
+require_once MODX_CORE_PATH . 'vendor/autoload.php';
 
 /* define this as true in another entry file, then include this file to simply access the API
  * without executing the MODX request handler */
@@ -31,12 +36,6 @@ if ($php_ver_comp < 0) {
 /* set the document_root */
 if(!isset($_SERVER['DOCUMENT_ROOT']) || empty($_SERVER['DOCUMENT_ROOT'])) {
     $_SERVER['DOCUMENT_ROOT'] = str_replace($_SERVER['PATH_INFO'], '', str_replace('\\\\', '/', $_SERVER['PATH_TRANSLATED'])) . '/';
-}
-
-/* include the modX class */
-if (!(include_once MODX_CORE_PATH . 'model/modx/modx.class.php')) {
-    include MODX_CORE_PATH . 'error/unavailable.include.php';
-    die('Site temporarily unavailable!');
 }
 
 /* @var modX $modx create the modX object */

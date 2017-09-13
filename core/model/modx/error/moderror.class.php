@@ -55,8 +55,8 @@ class modError {
      * @param modX $modx A reference to the modX instance
      * @param string $message The default message to send as an error response
      */
-    function __construct(modX &$modx, $message = '') {
-        $this->modx =& $modx;
+    function __construct(MODX\modX $modx, $message = '') {
+        $this->modx = $modx;
         if (is_string($message)) {
             $this->message = $message;
         } elseif (is_array($message) && isset($message['message'])) {

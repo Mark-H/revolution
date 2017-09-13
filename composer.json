@@ -46,7 +46,9 @@
         "php": ">=5.5",
         "xpdo/xpdo": "^3.0@dev",
         "slim/slim": "^3.5",
-        "php-di/slim-bridge": "^1.0"
+        "php-di/slim-bridge": "^1.0",
+        "smarty/smarty": "3.1.27",
+        "phpmailer/phpmailer": "5.2.21"
     },
     "autoload": {
         "psr-4": {

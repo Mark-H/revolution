@@ -252,8 +252,8 @@ class modElement extends modAccessibleSimpleObject {
      * @return mixed The result of processing.
      */
     public function process($properties= null, $content= null) {
-        $this->xpdo->getParser();
-        $this->xpdo->parser->setProcessingElement(true);
+        $parser = $this->xpdo->services->get('parser');
+        $parser->setProcessingElement(true);
         $this->getProperties($properties);
         $this->getTag();
         if ($this->xpdo->getDebug() === true) $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Processing Element: " . $this->get('name') . ($this->_tag ? "\nTag: {$this->_tag}" : "\n") . "\nProperties: " . print_r($this->_properties, true));
@@ -523,21 +523,21 @@ class modElement extends modAccessibleSimpleObject {
      * @return array A simple array of properties ready to use for processing.
      */
     public function getProperties($properties = null) {
-        $this->xpdo->getParser();
-        $this->_properties= $this->xpdo->parser->parseProperties($this->get('properties'));
+        $parser = $this->xpdo->services->get('parser');
+        $this->_properties= $parser->parseProperties($this->get('properties'));
         $set= $this->getPropertySet();
         if (!empty($set)) {
             $this->_properties= array_merge($this->_properties, $set);
         }
         if ($this->get('property_preprocess')) {
             foreach ($this->_properties as $pKey => $pValue) {
-                if ($this->xpdo->parser->processElementTags('', $pValue, $this->xpdo->parser->isProcessingUncacheable())) {
+                if ($parser->processElementTags('', $pValue, $parser->isProcessingUncacheable())) {
                     $this->_properties[$pKey]= $pValue;
                 }
             }
         }
         if (!empty($properties)) {
-            $this->_properties= array_merge($this->_properties, $this->xpdo->parser->parseProperties($properties));
+            $this->_properties= array_merge($this->_properties, $parser->parseProperties($properties));
         }
         return $this->_properties;
     }

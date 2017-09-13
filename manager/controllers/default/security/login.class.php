@@ -5,6 +5,10 @@
  * @package modx
  * @subpackage manager.controllers
  */
+
+use MODX\modX;
+use xPDO\xPDO;
+
 class SecurityLoginManagerController extends modManagerController {
     public $loadHeader = false;
     public $loadFooter = false;
@@ -187,7 +191,7 @@ class SecurityLoginManagerController extends modManagerController {
         if ($validated) {
             /** @var modProcessorResponse $response */
             $response = $this->modx->runProcessor('security/login',$this->scriptProperties);
-            if (($response instanceof modProcessorResponse) && !$response->isError()) {
+            if (($response instanceof \modProcessorResponse) && !$response->isError()) {
                 $url = !empty($this->scriptProperties['returnUrl']) ? $this->scriptProperties['returnUrl'] : $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
                 $url = $this->modx->getOption('url_scheme', null, MODX_URL_SCHEME).$this->modx->getOption('http_host', null, MODX_HTTP_HOST).rtrim($url,'/');
                 $this->modx->sendRedirect($url);
@@ -244,24 +248,24 @@ class SecurityLoginManagerController extends modManagerController {
             // Then restore previous placeholders to prevent any breakage
             $this->modx->placeholders = $ph;
 
-            $this->modx->getService('mail', 'mail.modPHPMailer');
-            $this->modx->mail->set(modMail::MAIL_BODY, $message);
-            $this->modx->mail->set(modMail::MAIL_FROM, $this->modx->getOption('emailsender'));
-            $this->modx->mail->set(modMail::MAIL_FROM_NAME, $this->modx->getOption('site_name'));
-            $this->modx->mail->set(modMail::MAIL_SENDER, $this->modx->getOption('emailsender'));
-            $this->modx->mail->set(modMail::MAIL_SUBJECT, $this->modx->getOption('emailsubject'));
-            $this->modx->mail->address('to', $user->get('email'),$user->get('fullname'));
-            $this->modx->mail->address('reply-to', $this->modx->getOption('emailsender'));
-            $this->modx->mail->setHTML(true);
-            if (!$this->modx->mail->send()) {
+            $mail = $this->modx->getContainer()->get('mail');
+            $mail->set(modMail::MAIL_BODY, $message);
+            $mail->set(modMail::MAIL_FROM, $this->modx->getOption('emailsender'));
+            $mail->set(modMail::MAIL_FROM_NAME, $this->modx->getOption('site_name'));
+            $mail->set(modMail::MAIL_SENDER, $this->modx->getOption('emailsender'));
+            $mail->set(modMail::MAIL_SUBJECT, $this->modx->getOption('emailsubject'));
+            $mail->address('to', $user->get('email'),$user->get('fullname'));
+            $mail->address('reply-to', $this->modx->getOption('emailsender'));
+            $mail->setHTML(true);
+            if (!$mail->send()) {
                 /* if for some reason error in email, tell user */
                 $err = $this->modx->lexicon('error_sending_email_to').$user->get('email');
-                $this->modx->log(modX::LOG_LEVEL_ERROR,$err);
+                $this->modx->log(xPDO::LOG_LEVEL_ERROR,$err);
                 $this->setPlaceholder('error_message',$err);
             } else {
                 $this->setPlaceholder('error_message',$this->modx->lexicon('login_password_reset_act_sent'));
             }
-            $this->modx->mail->reset();
+            $mail->reset();
         } else {
             $this->setPlaceholder('error_message',$this->modx->lexicon('login_user_err_nf_email'));
         }

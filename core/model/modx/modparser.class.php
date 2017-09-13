@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+use MODX\modX;
 use xPDO\xPDO;
 
 /**
@@ -53,8 +54,8 @@ class modParser {
     /**
      * @param xPDO $modx A reference to the modX|xPDO instance
      */
-    function __construct(xPDO &$modx) {
-        $this->modx =& $modx;
+    function __construct(modX $modx) {
+        $this->modx = $modx;
     }
 
     /**
@@ -845,8 +846,8 @@ abstract class modTag {
      * @return mixed The result of processing the tag.
      */
     public function process($properties= null, $content= null) {
-        $this->modx->getParser();
-        $this->modx->parser->setProcessingElement(true);
+        $parser = $this->modx->getContainer()->get('parser');
+        $parser->setProcessingElement(true);
         $this->getProperties($properties);
         $this->getTag();
         $this->filterInput();
@@ -966,13 +967,14 @@ abstract class modTag {
      * @return array A simple array of properties ready to use for processing.
      */
     public function getProperties($properties = null) {
-        $this->_properties= $this->modx->parser->parseProperties($this->get('properties'));
+        $parser = $this->modx->getContainer()->get('parser');
+        $this->_properties= $parser->parseProperties($this->get('properties'));
         $set= $this->getPropertySet();
         if (!empty($set)) {
             $this->_properties= array_merge($this->_properties, $set);
         }
         if (!empty($properties)) {
-            $this->_properties= array_merge($this->_properties, $this->modx->parser->parseProperties($properties));
+            $this->_properties= array_merge($this->_properties, $parser->parseProperties($properties));
         }
         return $this->_properties;
     }
@@ -1187,7 +1189,7 @@ class modPlaceholderTag extends modTag {
      * Overrides modTag::__construct to set the Placeholder Tag token
      * {@inheritdoc}
      */
-    function __construct(modX & $modx) {
+    function __construct(modX $modx) {
         parent :: __construct($modx);
         $this->setCacheable(false);
         $this->setToken('+');
@@ -1204,23 +1206,26 @@ class modPlaceholderTag extends modTag {
      */
     public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
+
+        $parser = $this->modx->getContainer()->get('parser');
+
         if (!$this->_processed) {
             $this->_output= $this->_content;
             if ($this->_output !== null && is_string($this->_output) && !empty($this->_output)) {
                     /* collect element tags in the content and process them */
                     $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
-                    $this->modx->parser->processElementTags(
+                    $parser->processElementTags(
                         $this->_tag,
                         $this->_output,
-                        $this->modx->parser->isProcessingUncacheable(),
-                        $this->modx->parser->isRemovingUnprocessed(),
+                        $parser->isProcessingUncacheable(),
+                        $parser->isRemovingUnprocessed(),
                         '[[',
                         ']]',
                         array(),
                         $maxIterations
                     );
                 }
-            if ($this->_output !== null || $this->modx->parser->startedProcessingUncacheable()) {
+            if ($this->_output !== null || $parser->startedProcessingUncacheable()) {
                 $this->filterOutput();
                 $this->_processed = true;
             }
@@ -1390,16 +1395,19 @@ class modLexiconTag extends modTag {
      */
     public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
+
+        $parser = $this->modx->getContainer()->get('parser');
+
         if (!$this->_processed) {
             $this->_output= $this->_content;
             if (is_string($this->_output) && !empty ($this->_output)) {
                 /* collect element tags in the content and process them */
                 $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
-                $this->modx->parser->processElementTags(
+                $parser->processElementTags(
                     $this->_tag,
                     $this->_output,
-                    $this->modx->parser->isProcessingUncacheable(),
-                    $this->modx->parser->isRemovingUnprocessed(),
+                    $parser->isProcessingUncacheable(),
+                    $parser->isRemovingUnprocessed(),
                     '[[',
                     ']]',
                     array(),

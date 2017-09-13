@@ -14,6 +14,9 @@
  * @subpackage filters
  */
 
+use MODX\modX;
+use xPDO\xPDO;
+
 /**
  * Base output filter implementation for modElement processing, based on phX.
  *
@@ -30,8 +33,8 @@ class modOutputFilter {
      * @param modX $modx A reference to the modX instance
      * @return modOutputFilter A new instance of the modOutputFilter class
      */
-    function __construct(modX &$modx) {
-        $this->modx= &$modx;
+    function __construct($modx) {
+        $this->modx= $modx;
     }
 
     /**

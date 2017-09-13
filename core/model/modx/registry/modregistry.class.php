@@ -74,8 +74,8 @@ class modRegistry {
      * @param modX &$modx A reference to a modX instance.
      * @param array $options Optional array of registry options.
      */
-    function __construct(modX &$modx, array $options = array()) {
-        $this->modx =& $modx;
+    function __construct(modX $modx, array $options = array()) {
+        $this->modx = $modx;
         $this->_options = $options;
     }
 

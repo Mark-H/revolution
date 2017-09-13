@@ -7,6 +7,9 @@
 
 require_once MODX_CORE_PATH . 'model/modx/mail/modmail.class.php';
 
+use MODX\modX;
+use xPDO\xPDO;
+
 /**
  * PHPMailer implementation of the modMail service.
  *
@@ -23,7 +26,6 @@ class modPHPMailer extends modMail {
      */
     function __construct(modX &$modx, array $attributes= array()) {
         parent :: __construct($modx, $attributes);
-        require_once $modx->getOption('core_path') . 'model/modx/mail/phpmailer/class.phpmailer.php';
         $this->_getMailer();
     }
 
@@ -114,7 +116,7 @@ class modPHPMailer extends modMail {
                 $this->mailer->Subject= $this->attributes[$key];
                 break;
             default :
-                $this->modx->log(modX::LOG_LEVEL_WARN, $this->modx->lexicon('mail_err_attr_nv',array('attr' => $key)));
+                $this->modx->log(xPDO::LOG_LEVEL_WARN, $this->modx->lexicon('mail_err_attr_nv',array('attr' => $key)));
                 break;
         }
     }
@@ -149,9 +151,9 @@ class modPHPMailer extends modMail {
                 }
             }
         } elseif ($email === null) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, $this->modx->lexicon('mail_err_unset_spec'));
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, $this->modx->lexicon('mail_err_unset_spec'));
         } else {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, $this->modx->lexicon('mail_err_address_ns'));
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, $this->modx->lexicon('mail_err_address_ns'));
         }
         return $set;
     }
@@ -181,8 +183,8 @@ class modPHPMailer extends modMail {
 
         $sent = $this->mailer->send();
         if ($sent !== true) {
-            $this->error = $this->modx->getService('error.modError');
-            $this->error->addError($this->mailer->ErrorInfo);
+            $error = $this->modx->getContainer()->get('error');
+            $error->addError($this->mailer->ErrorInfo);
         }
 
         return $sent;
@@ -210,25 +212,19 @@ class modPHPMailer extends modMail {
     protected function _getMailer() {
         $success= false;
         if (!$this->mailer || !($this->mailer instanceof PHPMailer)) {
-            if ($this->mailer= new PHPMailer()) {
-                // Make sure PHPMailer autoloader is loaded
-                if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
-                    $autoload = spl_autoload_functions();
-                    if ($autoload === false or !in_array('PHPMailerAutoload', $autoload)) {
-                        require 'phpmailer/PHPMailerAutoload.php';
-                    }
+            $this->mailer = new PHPMailer();
+
+            if (!empty($this->attributes)) {
+                foreach ($this->attributes as $attrKey => $attrVal) {
+                    $this->set($attrKey, $attrVal);
                 }
-                if (!empty($this->attributes)) {
-                    foreach ($this->attributes as $attrKey => $attrVal) {
-                        $this->set($attrKey, $attrVal);
-                    }
-                }
-                if (!isset($this->attributes[modMail::MAIL_LANGUAGE])) {
-                    $this->set(modMail::MAIL_LANGUAGE, $this->modx->config['manager_language']);
-                }
-                $success= true;
             }
+            if (!isset($this->attributes[modMail::MAIL_LANGUAGE])) {
+                $this->set(modMail::MAIL_LANGUAGE, $this->modx->config['manager_language']);
+            }
+            $success= true;
         }
+
         return $success;
     }
 

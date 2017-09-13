@@ -390,7 +390,7 @@ class modRequest {
         if ($className = $this->modx->loadClass('error.'.$class,'',false,true)) {
             $this->modx->error = new $className($this->modx);
         } else {
-            $this->modx->log(modX::LOG_LEVEL_FATAL,'Error handling class could not be loaded: '.$class);
+            $this->modx->log(xPDO::LOG_LEVEL_FATAL,'Error handling class could not be loaded: '.$class);
         }
     }
 

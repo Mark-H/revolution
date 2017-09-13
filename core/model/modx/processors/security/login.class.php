@@ -31,7 +31,7 @@ class modSecurityLoginProcessor extends modProcessor {
 
         $this->rememberme = ($this->getProperty('rememberme', false) == true);
         $this->lifetime = (int)$this->getProperty('lifetime', $this->modx->getOption('session_cookie_lifetime', null,0));
-        $this->loginContext = $this->getProperty('login_context', $this->modx->context->get('key'));
+        $this->loginContext = $this->getProperty('login_context', $this->modx->getContainer()->get('context'));
         $this->addContexts = $this->getProperty('add_contexts', array());
         $this->addContexts = empty($this->addContexts) ? array() : explode(',', $this->addContexts);
         /* Events are fired based on the primary loginContext */
@@ -131,15 +131,15 @@ class modSecurityLoginProcessor extends modProcessor {
         /** @var modUserProfile $profile */
         $profile = $this->user->Profile;
 
-        if ($profile->get('failed_logins') >= $this->modx->getOption('failed_login_attempts') &&
+        if ($profile->get('failed_logins') >= $this->modx->getContainer()->get('config')->get('failed_login_attempts') &&
             $profile->get('blockeduntil') > time()) {
             return $this->modx->lexicon('login_blocked_too_many_attempts');
         }
 
-        if ($profile->get('failedlogincount') >= $this->modx->getOption('failed_login_attempts')) {
+        if ($profile->get('failedlogincount') >= $this->modx->getContainer()->get('config')->get('failed_login_attempts')) {
             $profile->set('failedlogincount', 0);
             $profile->set('blocked', 1);
-            $profile->set('blockeduntil', time() + (60 * $this->modx->getOption('blocked_minutes')));
+            $profile->set('blockeduntil', time() + (60 * $this->modx->getContainer()->get('config')->get('blocked_minutes')));
             $profile->save();
         }
         if ($profile->get('blockeduntil') != 0 && $profile->get('blockeduntil') < time()) {
@@ -232,7 +232,7 @@ class modSecurityLoginProcessor extends modProcessor {
             "loginContext" => & $this->loginContext,
             "addContexts" => & $this->addContexts,
         );
-
+        return true;
         return $this->modx->invokeEvent($this->isMgr ? "OnManagerAuthentication" : "OnWebAuthentication", $loginParams);
     }
 
@@ -314,6 +314,7 @@ class modSecurityLoginProcessor extends modProcessor {
             $manager_login_startup= intval($manager_login_startup);
             if ($manager_login_startup) $manager_login_startup_url .= '?id=' . $manager_login_startup;
         }
+
         return array(
             'url' => $manager_login_startup_url,
             'token' => $userToken,
@@ -348,7 +349,7 @@ class modSecurityLoginProcessor extends modProcessor {
      * @return array
      */
     public function prepareResponse() {
-        $userToken = $this->user->getUserToken($this->modx->context->get('key'));
+        $userToken = $this->user->getUserToken($this->modx->getContainer()->get('xpdo')->services->get('context'));
         $returnUrl = $this->getProperty('returnUrl', '');
 
         switch ($this->loginContext) {
@@ -372,7 +373,7 @@ class modSecurityLoginProcessor extends modProcessor {
         $this->fireAfterLoginEvent();
 
         $this->modx->logManagerAction('login','modContext',$this->loginContext, $this->user->get('id'));
-        
+
         return $this->prepareResponse();
     }
 
@@ -384,7 +385,6 @@ class modSecurityLoginProcessor extends modProcessor {
         if (!empty($preventLogin)) {
             return $this->failure($preventLogin);
         }
-
         $canLogin = $this->fireOnAuthenticationEvent();
         $preventLogin = $this->checkPassword($canLogin);
         if (!empty($preventLogin)) {

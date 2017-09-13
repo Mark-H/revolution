@@ -15,7 +15,7 @@ class modDashboardWidgetRecentlyEditedResources extends modDashboardWidgetInterf
         $this->controller->addHtml('<script type="text/javascript">Ext.onReady(function() {
     MODx.load({
         xtype: "modx-grid-user-recent-resource"
-        ,user: "'.$this->modx->user->get('id').'"
+        ,user: "'.$this->modx->services->get('user')->get('id').'"
         ,renderTo: "modx-grid-user-recent-resource"
     });
 });</script>');

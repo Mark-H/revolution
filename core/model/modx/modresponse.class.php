@@ -7,6 +7,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+use MODX\modX;
+use xPDO\xPDO;
+
 /**
  * Encapsulates a MODX response to a web request.
  *
@@ -40,8 +44,9 @@ class modResponse {
     /**
      * @param modX $modx A reference to the modX instance
      */
-    function __construct(modX &$modx) {
+    function __construct(modX &$modx, $context) {
         $this->modx= & $modx;
+        $this->context = $context;
     }
 
     /**
@@ -52,9 +57,9 @@ class modResponse {
     public function outputContent(array $options = array()) {
         if (!($this->contentType = $this->modx->resource->getOne('ContentType'))) {
             if ($this->modx->getDebug() === true) {
-                $this->modx->log(modX::LOG_LEVEL_DEBUG, "No valid content type for RESOURCE: " . print_r($this->modx->resource->toArray(), true));
+                $this->modx->log(xPDO::LOG_LEVEL_DEBUG, "No valid content type for RESOURCE: " . print_r($this->modx->resource->toArray(), true));
             }
-            $this->modx->log(modX::LOG_LEVEL_FATAL, "The requested resource has no valid content type specified.");
+            $this->modx->log(xPDO::LOG_LEVEL_FATAL, "The requested resource has no valid content type specified.");
         }
 
         if (!$this->contentType->get('binary')) {
@@ -207,11 +212,11 @@ class modResponse {
         $options = array_merge(array('count_attempts' => false, 'type' => $type, 'responseCode' => $responseCode), $options);
         $url= str_replace('&amp;','&',$url);
         if (empty ($url)) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, "Attempted to redirect to an empty URL.");
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Attempted to redirect to an empty URL.");
             return false;
         }
         if (!$this->modx->getRequest()) {
-            $this->modx->log(modX::LOG_LEVEL_FATAL, "Could not load request class.");
+            $this->modx->log(xPDO::LOG_LEVEL_FATAL, "Could not load request class.");
         }
         if (isset($options['preserve_request']) && !empty($options['preserve_request'])) {
             $this->modx->request->preserveRequest('referrer.redirected');
@@ -220,7 +225,7 @@ class modResponse {
             /* append the redirect count string to the url */
             $currentNumberOfRedirects= isset ($_REQUEST['err']) ? $_REQUEST['err'] : 0;
             if ($currentNumberOfRedirects > 3) {
-                $this->modx->log(modX::LOG_LEVEL_FATAL, 'Redirection attempt failed - please ensure the resource you\'re trying to redirect to exists. <p>Redirection URL: <i>' . $url . '</i></p>');
+                $this->modx->log(xPDO::LOG_LEVEL_FATAL, 'Redirection attempt failed - please ensure the resource you\'re trying to redirect to exists. <p>Redirection URL: <i>' . $url . '</i></p>');
             } else {
                 $currentNumberOfRedirects += 1;
                 if (strpos($url, "?") > 0) {

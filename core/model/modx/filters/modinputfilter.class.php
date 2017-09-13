@@ -14,6 +14,9 @@
  * @subpackage filters
  */
 
+use MODX\modX;
+use xPDO\xPDO;
+
 /**
  * Base input filter implementation for modElement processing, based on phX.
  *
@@ -33,8 +36,11 @@ class modInputFilter {
      *
      * @param modX $modx A reference to the modX instance.
      */
-    function __construct(modX &$modx) {
-        $this->modx = &$modx;
+    /*
+     * TODO, this needs cleanup. modInputFilter is created with both xPDO and modX instances
+     */
+    function __construct($modx) {
+        $this->modx = $modx;
     }
 
     /**

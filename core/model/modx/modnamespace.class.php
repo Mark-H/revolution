@@ -35,7 +35,7 @@ class modNamespace extends modAccessibleObject {
         return $removed;
     }
 
-    public static function loadCache(modX $modx) {
+    public static function loadCache(MODX\modX $modx) {
         if (!$modx->getCacheManager()) {
             return array();
         }
@@ -51,7 +51,7 @@ class modNamespace extends modAccessibleObject {
         return $cache;
     }
 
-    public static function clearCache(modX $modx) {
+    public static function clearCache(MODX\modX $modx) {
         $cacheKey= 'namespaces';
         $cleared = $modx->cacheManager->delete($cacheKey, array(
             xPDO::OPT_CACHE_KEY => $modx->getOption('cache_namespaces_key', null, 'namespaces'),

@@ -99,20 +99,25 @@ class modChunk extends modElement {
      */
     public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
+
+        $parser = $this->xpdo->services->get('parser');
+
         if (!$this->_processed || !$this->isCacheable()) {
             /* copy the content into the output buffer */
             $this->_output= $this->_content;
             if (is_string($this->_output) && !empty ($this->_output)) {
                 /* turn the processed properties into placeholders */
-                $scope = $this->xpdo->toPlaceholders($this->_properties, '', '.', true);
+                // TODO
+                //$scope = $this->xpdo->toPlaceholders($this->_properties, '', '.', true);
 
                 /* collect element tags in the output and process them */
                 $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',null,10));
-                $this->xpdo->parser->processElementTags(
+
+                $parser->processElementTags(
                     $this->_tag,
                     $this->_output,
-                    $this->xpdo->parser->isProcessingUncacheable(),
-                    $this->xpdo->parser->isRemovingUnprocessed(),
+                    $parser->isProcessingUncacheable(),
+                    $parser->isRemovingUnprocessed(),
                     '[[',
                     ']]',
                     array(),
@@ -120,15 +125,16 @@ class modChunk extends modElement {
                 );
 
                 /* remove the placeholders set from the properties of this element and restore global values */
-                if (isset($scope['keys'])) $this->xpdo->unsetPlaceholders($scope['keys']);
-                if (isset($scope['restore'])) $this->xpdo->toPlaceholders($scope['restore']);
+                // TODO
+                //if (isset($scope['keys'])) $this->xpdo->unsetPlaceholders($scope['keys']);
+                //if (isset($scope['restore'])) $this->xpdo->toPlaceholders($scope['restore']);
             }
             $this->filterOutput();
             $this->cache();
             $this->_processed= true;
         }
 
-        $this->xpdo->parser->setProcessingElement(false);
+        $parser->setProcessingElement(false);
         /* finally, return the processed element content */
         return $this->_output;
     }

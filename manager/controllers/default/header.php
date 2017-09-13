@@ -12,6 +12,8 @@
  * @subpackage manager.controllers
  */
 
+use xPDO\xPDO;
+
 class TopMenu
 {
     /**
@@ -213,7 +215,7 @@ class TopMenu
     {
         $key = $this->getCacheKey($name);
 
-        $menus = $this->modx->cacheManager->get($key, array(
+        $menus = $this->modx->getContainer()->get('cacheManager')->get($key, array(
             xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_menu_key', null, 'menu'),
             xPDO::OPT_CACHE_HANDLER => $this->modx->getOption(
                 'cache_menu_handler',

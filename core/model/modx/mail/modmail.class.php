@@ -183,7 +183,7 @@ abstract class modMail {
      * @param modX &$modx A reference to the modX instance
      * @param array $attributes An array of attributes to assign to the new mail instance
      */
-    function __construct(modX &$modx, array $attributes= array()) {
+    function __construct(MODX\modX &$modx, array $attributes= array()) {
         $this->modx= & $modx;
         if (!$this->modx->lexicon) {
             $this->modx->getService('lexicon','modLexicon');

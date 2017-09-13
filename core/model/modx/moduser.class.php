@@ -58,12 +58,12 @@ class modUser extends modPrincipal {
         if (!$this->getOption(xPDO::OPT_SETUP)) {
             if ($k == 'sudo') return false;
         }
-        if (in_array($k, array('password', 'cachepwd')) && $this->xpdo->getService('hashing', 'hashing.modHashing')) {
+        if (in_array($k, array('password', 'cachepwd'))) {
             if (!$this->get('salt')) {
                 $this->set('salt', md5(uniqid(rand(),true)));
             }
             $vOptions = array('salt' => $this->get('salt'));
-            $v = $this->xpdo->hashing->getHash('', $this->get('hash_class'))->hash($v, $vOptions);
+            $v = $this->xpdo->services->get('hashing')->getHash('', $this->get('hash_class'))->hash($v, $vOptions);
         }
         return parent::set($k, $v, $vType);
     }
@@ -239,9 +239,10 @@ class modUser extends modPrincipal {
      */
     public function passwordMatches($password, array $options = array()) {
         $match = false;
-        if ($this->xpdo->getService('hashing', 'hashing.modHashing')) {
+        $hashing = $this->xpdo->services->get('hashing');
+        if ($hashing !== null) {
             $options = array_merge(array('salt' => $this->get('salt')), $options);
-            $hashedPassword = $this->xpdo->hashing->getHash('', $this->get('hash_class'))->hash($password, $options);
+            $hashedPassword = $hashing->getHash('', $this->get('hash_class'))->hash($password, $options);
             $match = ($this->get('password') === $hashedPassword);
         }
         return $match;
@@ -348,7 +349,7 @@ class modUser extends modPrincipal {
      * @param string $context The context to add to the user session.
      */
     public function addSessionContext($context) {
-        if (!$this->xpdo->startSession()) {
+        if (!$this->xpdo->services->get('session_starter')) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Attempt to start a session failed", '', __METHOD__, __FILE__, __LINE__);
             return;
         }
@@ -393,7 +394,7 @@ class modUser extends modPrincipal {
      * @return string
      */
     public function getUserToken($ctx = '') {
-        if (empty($ctx)) $ctx = $this->xpdo->context->get('key');
+        if (empty($ctx)) $ctx = $this->xpdo->services->get('context');
         return isset($_SESSION['modx.'.$ctx.'.user.token']) ? $_SESSION['modx.'.$ctx.'.user.token'] : '';
     }
 
@@ -582,10 +583,11 @@ class modUser extends modPrincipal {
     /**
      * Return the Primary Group of this User
      *
+     * @param modContext
      * @return modUserGroup|null
      */
     public function getPrimaryGroup() {
-        if (!$this->isAuthenticated($this->xpdo->context->get('key'))) {
+        if (!$this->isAuthenticated($this->xpdo->services->get('context'))) {
             return null;
         }
         $userGroup = $this->getOne('PrimaryGroup');

@@ -63,6 +63,10 @@ class modX extends App
      */
     public $xpdo;
     /**
+     * @var string The current context key
+     */
+    public $currentContextKey;
+    /**
      * @var modContext The Context represents a unique section of the site which
      * this modX instance is controlling.
      */
@@ -135,10 +139,6 @@ class modX extends App
      */
     public $cultureKey = '';
     /**
-     * @var modLexicon Represents a localized dictionary of common words and phrases.
-     */
-    public $lexicon = null;
-    /**
      * @var modUser The current user object, if one is authenticated for the
      * current request and context.
      */
@@ -203,10 +203,6 @@ class modX extends App
      * @var modManagerController A controller object that represents a page in the manager
      */
     public $controller = null;
-    /**
-     * @var modRegistry $registry
-     */
-    public $registry;
     /**
      * @var modMail $mail
      */
@@ -293,6 +289,15 @@ class modX extends App
     public function __get($name)
     {
         if (in_array($name, ['cacheManager'], true)) {
+            return $this->getContainer()->get($name);
+        }
+        if (in_array($name, ['smarty'], true)) {
+            return $this->getContainer()->get($name);
+        }
+        if (in_array($name, ['lexicon'], true)) {
+            return $this->getContainer()->get($name);
+        }
+        if (in_array($name, ['registry'], true)) {
             return $this->getContainer()->get($name);
         }
     }
@@ -496,10 +501,12 @@ class modX extends App
                     array_unshift($data[xPDO::OPT_CONNECTIONS], $primaryConnection);
                     if (!empty($site_id)) $this->site_id = $site_id;
                     if (!empty($uuid)) $this->uuid = $uuid;
+
                 } else {
                     throw new xPDOException("Could not load required config data.");
                 }
                 $config->replace($data);
+
                 return xPDO::getInstance(null, $this->getContainer());
             },
 
@@ -544,7 +551,53 @@ class modX extends App
                     return $registry;
                 }
                 throw new Exception('Could not load lexicon');
-            }
+            },
+            'smarty' => function(ContainerInterface $c) {
+                $xpdo = $c->get('xpdo');
+                $config = $c->get('config');
+
+                $xpdo->loadClass('smarty.modSmarty','', false, true);
+                if ($smarty = new \modSmarty($this)) {
+                    return $smarty;
+                }
+                throw new Exception('Could not load smarty');
+            },
+            'contexts' => function(ContainerInterface $c) {
+                // TODO
+            },
+            'context' => function(ContainerInterface $c) {
+                return 'mgr';
+            },
+            'hashing' => function(ContainerInterface $c) {
+                $xpdo = $c->get('xpdo');
+                $xpdo->loadClass('hashing.modHashing','', false, true);
+                if ($hashing = new \modHashing($this)) {
+                    return $hashing;
+                }
+                throw new Exception('Could not load hashing');
+            },
+            'mail' => function(ContainerInterface $c) {
+                $xpdo = $c->get('xpdo');
+                $xpdo->loadClass('mail.modPHPMailer','', false, true);
+                if ($mail = new \modPHPMailer($this)) {
+                    return $mail;
+                }
+                throw new Exception('Could not load mail');
+            },
+            'error' => function(ContainerInterface $c) {
+                $xpdo = $c->get('xpdo');
+                $xpdo->loadClass('error.modError','', false, true);
+                if ($error = new \modError($this)) {
+                    return $error;
+                }
+                throw new Exception('Could not load email');
+            },
+            'session_starter' => function(ContainerInterface $c) {
+                return $this->startSession();
+            },
+            'user' => function(ContainerInterface $c) {
+                return $this->user;
+            },
         ]);
 
         $builder->addDefinitions(__DIR__ . '/../config/container.php');
@@ -621,6 +674,10 @@ class modX extends App
      */
     public function getCacheManager() {
         if ($this->cacheManager === null) {
+            // Because MODX used to extend XPDO, XPDO had a reference to the active cacheManager from the moment
+            // it was created. As we no longer extend XPDO we need to set the reference to this manager
+            // here. This does create a type of circular dependency, but it works.
+            $this->getContainer()->get('xpdo')->cacheManager = $this->getContainer()->get('cacheManager');
             $this->cacheManager = $this->getContainer()->get('cacheManager');
         }
 
@@ -1225,13 +1282,14 @@ class modX extends App
                 }
             }
         } else {
-            $this->user = $this->newObject('modUser');
+            $this->user = new \modUser($this->getContainer()->get('xpdo'), $this->config, $this->context);
             $this->user->fromArray(array(
                 'id' => 0,
                 'username' => $this->getOption('default_username','','(anonymous)',true)
             ), '', true);
         }
         $this->toPlaceholders($this->user->get(array('id','username')),'modx.user');
+
         return $this->user;
     }
 
@@ -1378,7 +1436,7 @@ class modX extends App
      * loaded on this or any previous call to the function, false otherwise.
      */
     public function getRequest($class= 'modRequest', $path= '') {
-        if ($this->request === null || !($this->request instanceof modRequest)) {
+        if ($this->request === null || !($this->request instanceof \modRequest)) {
             $requestClass = $this->getOption('modRequest.class',$this->config,$class);
             if ($requestClass !== $class) {
                 $this->loadClass('modRequest', '', false, true);
@@ -1386,7 +1444,8 @@ class modX extends App
             if ($className= $this->loadClass($requestClass, $path, !empty($path), true))
                 $this->request= new $className ($this);
         }
-        return is_object($this->request) && $this->request instanceof modRequest;
+
+        return is_object($this->request) && $this->request instanceof \modRequest;
     }
 
     /**
@@ -1404,8 +1463,9 @@ class modX extends App
         $responseClass= $this->getOption('modResponse.class',$this->config,$class);
         $className= $this->loadClass($responseClass, $path, !empty($path), true);
         if ($this->response === null || !($this->response instanceof $className)) {
-            if ($className) $this->response= new $className ($this);
+            if ($className) $this->response= new $className ($this, $this->context);
         }
+
         return $this->response instanceof $className;
     }
 
@@ -1537,10 +1597,12 @@ class modX extends App
     public function invokeEvent($eventName, array $params= array ()) {
         if (!$eventName)
             return false;
-        if ($this->eventMap === null && $this->context instanceof modContext)
+        if ($this->eventMap === null && $this->context instanceof \modContext) {
             $this->_initEventMap($this->context->get('key'));
+        }
+
         if (!isset ($this->eventMap[$eventName])) {
-            //$this->log(modX::LOG_LEVEL_DEBUG,'System event '.$eventName.' was executed but does not exist.');
+            $this->log(xPDO::LOG_LEVEL_DEBUG,'System event '.$eventName.' was executed but does not exist.');
             return false;
         }
         $results= array ();
@@ -1586,6 +1648,7 @@ class modX extends App
                 }
             }
         }
+
         return $results;
     }
 
@@ -1657,13 +1720,14 @@ class modX extends App
                 }
             }
             if (empty($processor)) {
-                $processor = new modDeprecatedProcessor($this, $scriptProperties);
+                $processor = new \modDeprecatedProcessor($this, $scriptProperties);
             }
             $processor->setPath($processorFile);
             $response = $processor->run();
         } else {
-            $this->log(modX::LOG_LEVEL_ERROR, "Processor {$processorFile} does not exist; " . print_r($options, true));
+            $this->log(xPDO::LOG_LEVEL_ERROR, "Processor {$processorFile} does not exist; " . print_r($options, true));
         }
+
         return $response;
     }
 
@@ -2018,6 +2082,9 @@ class modX extends App
                 }
             }
         }
+
+        var_dump($eventElementMap);
+
         return $eventElementMap;
     }
 
@@ -2318,6 +2385,7 @@ class modX extends App
                 }
             }
         }
+
         if ($initialized) {
             $this->setLogLevel($this->getOption('log_level', $options, xPDO::LOG_LEVEL_ERROR));
             $this->setLogTarget($this->getOption('log_target', $options, 'FILE'));
@@ -2346,7 +2414,8 @@ class modX extends App
             setlocale(LC_ALL, $this->getOption('locale', null, $locale));
         }
 
-        $this->getService('lexicon', $this->getOption('lexicon_class', $options, 'modLexicon'), '', is_array($options) ? $options : array());
+        $this->getContainer()->get('lexicon')->setConfig(is_array($options) ? $options : array());
+
         $this->invokeEvent('OnInitCulture');
     }
 
@@ -2464,8 +2533,8 @@ class modX extends App
      */
     protected function _loadConfig() {
         $this->config = $this->_config;
-
         $this->getCacheManager();
+
         $config = $this->cacheManager->get('config', array(
             xPDO::OPT_CACHE_KEY => $this->getOption('cache_system_settings_key', null, 'system_settings'),
             xPDO::OPT_CACHE_HANDLER => $this->getOption('cache_system_settings_handler', null, $this->getOption(xPDO::OPT_CACHE_HANDLER)),

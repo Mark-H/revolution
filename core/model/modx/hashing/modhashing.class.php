@@ -46,7 +46,7 @@ class modHashing {
      * @param xPDO &$modx A reference to an modX (or xPDO) instance.
      * @param array|null $options An array of options for the hashing service.
      */
-    function __construct(xPDO &$modx, $options= array()) {
+    function __construct(MODX\modX $modx, $options= array()) {
         $this->modx= & $modx;
         if (is_array($options)) {
             $this->options = $options;

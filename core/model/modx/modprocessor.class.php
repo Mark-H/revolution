@@ -37,7 +37,7 @@ abstract class modProcessor {
      * @param modX $modx A reference to the modX instance
      * @param array $properties An array of properties
      */
-    function __construct(modX & $modx,array $properties = array()) {
+    function __construct(MODX\modX & $modx,array $properties = array()) {
         $this->modx =& $modx;
         $this->setProperties($properties);
     }
@@ -142,7 +142,7 @@ abstract class modProcessor {
      * @param array $properties An array of properties being run with the processor
      * @return modProcessor The class specified by $className
      */
-    public static function getInstance(modX &$modx,$className,$properties = array()) {
+    public static function getInstance(MODX\modX &$modx,$className,$properties = array()) {
         /** @var modProcessor $processor */
         $processor = new $className($modx,$properties);
         return $processor;
@@ -166,7 +166,7 @@ abstract class modProcessor {
         } else {
             $topics = $this->getLanguageTopics();
             foreach ($topics as $topic) {
-                $this->modx->lexicon->load($topic);
+                $this->modx->getContainer()->get('lexicon')->load($topic);
             }
 
             $initialized = $this->initialize();
@@ -1589,7 +1589,7 @@ class modProcessorResponse {
      * @param modX $modx A reference to the modX object.
      * @param array $response The array response from the modX.runProcessor method
      */
-    function __construct(modX &$modx,$response = array()) {
+    function __construct(MODX\modX &$modx,$response = array()) {
         $this->modx =& $modx;
         $this->response = $response;
         if ($this->isError()) {

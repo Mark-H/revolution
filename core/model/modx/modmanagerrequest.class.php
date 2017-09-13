@@ -6,6 +6,7 @@
  */
 use xPDO\Cache\xPDOCacheManager;
 use xPDO\xPDO;
+use MODX\modX;
 
 require_once MODX_CORE_PATH . 'model/modx/modrequest.class.php';
 /**
@@ -71,9 +72,8 @@ class modManagerRequest extends modRequest {
         if (!file_exists($templatePath)) { /* fallback to default */
             $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
         }
-        $this->modx->getService('smarty', 'smarty.modSmarty', '', array(
-            'template_dir' => $templatePath,
-        ));
+
+        $this->modx->smarty->setTemplateDir($templatePath);
         /* load context-specific cache dir */
         $this->modx->smarty->setCachePath($this->modx->context->get('key').'/smarty/'.$theme.'/');
 

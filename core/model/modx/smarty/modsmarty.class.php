@@ -14,7 +14,6 @@
  */
 use xPDO\xPDO;
 
-include_once (strtr(realpath(dirname(__FILE__)) . '/../../smarty/Smarty.class.php', '\\', '/'));
 /**
  * An extension of the Smarty class for use with modX.
  *
@@ -54,7 +53,7 @@ class modSmarty extends SmartyBC {
      * @param modX $modx A reference to the modX object
      * @param array $params An array of configuration parameters
      */
-    function __construct(modX &$modx, $params= array ()) {
+    function __construct(MODX\modX &$modx, $params= array ()) {
         parent :: __construct();
         $this->modx= & $modx;
 
@@ -62,9 +61,6 @@ class modSmarty extends SmartyBC {
         $this->template_dir = $modx->getOption('manager_path') . 'templates/';
         $this->compile_dir  = $modx->getOption(xPDO::OPT_CACHE_PATH) . 'mgr/smarty/';
         $this->config_dir   = $modx->getOption('core_path') . 'model/smarty/configs';
-        $this->plugins_dir  = array(
-            $this->modx->getOption('core_path') . 'model/smarty/plugins',
-        );
         $this->caching = false;
 
         foreach ($params as $paramKey => $paramValue) {

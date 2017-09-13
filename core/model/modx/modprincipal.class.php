@@ -2,6 +2,7 @@
 /**
  * @package modx
  */
+use xPDO\xPDO;
 use xPDO\Om\xPDOSimpleObject;
 
 /**
@@ -20,6 +21,10 @@ class modPrincipal extends xPDOSimpleObject {
      * @access protected
      */
     protected $_attributes = null;
+
+    public function __construct(xPDO $xpdo) {
+        parent::__construct($xpdo);
+    }
 
     /**
      * Load attributes of the principal that define access to secured objects.

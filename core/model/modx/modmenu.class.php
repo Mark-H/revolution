@@ -83,7 +83,7 @@ class modMenu extends modAccessibleObject {
         if (!$this->xpdo->lexicon) {
             $this->xpdo->getService('lexicon','modLexicon');
         }
-        $this->xpdo->lexicon->load('menu','topmenu');
+        $this->xpdo->services->get('lexicon')->load('menu','topmenu');
 
         $c = $this->xpdo->newQuery('modMenu');
         $c->select($this->xpdo->getSelectColumns('modMenu', 'modMenu'));
@@ -119,25 +119,29 @@ class modMenu extends modAccessibleObject {
                 $this->xpdo->lexicon->load($namespace.':default');
             }
 
-            /* if 3rd party menu item, load proper text */
+            $lexicon = $this->xpdo->services->get('lexicon');
+
+            /*
+            /* if 3rd party menu item, load proper text 
             if (!empty($action)) {
                 if (!empty($namespace) && $namespace != 'core') {
                     $ma['text'] = $menu->get('text') === 'user'
-                        ? $this->xpdo->lexicon($menu->get('text'), array('username' => $this->xpdo->getLoginUserName()))
-                        : $this->xpdo->lexicon($menu->get('text'));
+                        ? $lexicon->lexicon($menu->get('text'), array('username' => $this->xpdo->getLoginUserName()))
+                        : $lexicon->lexicon($menu->get('text'));
                 } else {
                     $ma['text'] = $menu->get('text') === 'user'
-                        ? $this->xpdo->lexicon($menu->get('text'), array('username' => $this->xpdo->getLoginUserName()))
-                        : $this->xpdo->lexicon($menu->get('text'));
+                        ? $lexicon->lexicon($menu->get('text'), array('username' => $this->xpdo->getLoginUserName()))
+                        : $lexicon->lexicon($menu->get('text'));
                 }
             } else {
                 $ma['text'] = $menu->get('text') === 'user'
-                    ? $this->xpdo->lexicon($menu->get('text'), array('username' => $this->xpdo->getLoginUserName()))
-                    : $this->xpdo->lexicon($menu->get('text'));
+                    ? $lexicon->lexicon($menu->get('text'), array('username' => $this->xpdo->getLoginUserName()))
+                    : $lexicon->lexicon($menu->get('text'));
             }
+            */
 
             $desc = $menu->get('description');
-            $ma['description'] = !empty($desc) ? $this->xpdo->lexicon($desc) : '';
+            $ma['description'] = !empty($desc) ? $lexicon->lexicon($desc) : '';
             $ma['children'] = $menu->get('text') != '' ? $this->getSubMenus($menu->get('text')) : array();
 
             if ($menu->get('controller')) {

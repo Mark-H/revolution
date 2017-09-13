@@ -46,6 +46,14 @@ class modLexicon {
      */
     protected $_paths = array();
     /**
+     * Array that holds the config
+     *
+     * @deprecated
+     * @var array $_config
+     * @access protected
+     */
+    protected $_config = array();
+    /**
      * An array of loaded topic strings
      *
      * @var array $_loadedTopics
@@ -65,6 +73,33 @@ class modLexicon {
              'core' => $this->modx->getOption('core_path') . 'cache/lexicon/',
         );
         $this->_lexicon = array($this->modx->getOption('cultureKey',null,'en') => array());
+        $this->setConfig($config);
+    }
+
+    /**
+     * This method was moved from modX::lexicon over here
+     * @param $key
+     * @param array $params
+     * @param string $language
+     * @return null
+     */
+
+    public function lexicon($key,$params = array(),$language = '') {
+        $language = !empty($language) ? $language : $this->modx->getOption('cultureKey',null,'en');
+        if ($this->modx->getContainer()->get('lexicon')) {
+            return $this->modx->getContainer()->get('lexicon')->process($key,$params,$language);
+        } else {
+            $this->log(modX::LOG_LEVEL_ERROR,'Culture not initialized; cannot use lexicon.');
+        }
+        return null;
+    }
+
+    /**
+     * Set the config by providing a array with configurations
+     *
+     * @param array $config An array of configuration properties
+     */
+    public function setConfig(array $config = array()) {
         $this->config = array_merge($config,array());
     }
 
