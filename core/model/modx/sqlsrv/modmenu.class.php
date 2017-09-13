@@ -86,4 +86,8 @@ class modMenu_sqlsrv extends modMenu {
         unset($menu,$desc,$namespace,$ma);
         return $list;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 3.x

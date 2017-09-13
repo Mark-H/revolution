@@ -133,6 +133,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     ,duplicateResource: function(item,e) {
         var node = this.cm.activeNode;
         var id = node.id.split('_');id = id[1];
+        var name = node.ui.textNode.innerText;
 
         var r = {
             resource: id
@@ -141,6 +142,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         var w = MODx.load({
             xtype: 'modx-window-resource-duplicate'
             ,resource: id
+            ,pagetitle: name
             ,hasChildren: node.attributes.hasChildren
             ,childCount: node.attributes.childCount
             ,listeners: {
@@ -206,8 +208,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     ,deleteDocument: function(itm,e) {
         var node = this.cm.activeNode;
         var id = node.id.split('_');id = id[1];
+        var pagetitle = node.ui.textNode.innerText;
         MODx.msg.confirm({
-            title: _('resource_delete')
+            title: pagetitle ? _('resource_delete') + ' ' + pagetitle : _('resource_delete')
             ,text: _('resource_delete_confirm')
             ,url: MODx.config.connector_url
             ,params: {
@@ -462,7 +465,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,listeners: {
                 'success':{
                     fn: function() {
-                        this.refreshNode(this.cm.activeNode.id, true);
+                        this.refreshNode(this.cm.activeNode.id, this.cm.activeNode.childNodes.length > 0);
                     }
                     ,scope: this}
                 ,'hide':{fn:function() {this.destroy();}}

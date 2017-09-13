@@ -72,7 +72,11 @@ MODx.grid.Context = function(config) {
             ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
-                'click': {fn: this.clearFilter, scope: this}
+                'click': {fn: this.clearFilter, scope: this},
+                'mouseout': { fn: function(evt){
+                    this.removeClass('x-btn-focus');
+                }
+                }
             }
         }]
     });
@@ -86,6 +90,13 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         var r = this.getSelectionModel().getSelected();
         var p = r.data.perm;
         var m = [];
+        if (p.indexOf('pnew') != -1) {
+            m.push({
+                text: _('context_duplicate')
+                ,handler: this.duplicateContext
+                ,scope: this
+            });
+        }
         if (p.indexOf('pedit') != -1) {
             m.push({
                 text: _('context_update')
@@ -101,6 +112,27 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
             });
         }
         return m;
+    }
+
+    ,duplicateContext: function() {
+        var r = {
+            key: this.menu.record.key
+            ,newkey: ''
+        };
+        var w = MODx.load({
+            xtype: 'modx-window-context-duplicate'
+            ,record: r
+            ,listeners: {
+                'success': {fn:function() {
+                    this.refresh();
+                    var tree = Ext.getCmp('modx-resource-tree');
+                    if (tree) {
+                        tree.refresh();
+                    }
+                },scope:this}
+            }
+        });
+        w.show();
     }
 
     ,search: function(tf,newValue,oldValue) {

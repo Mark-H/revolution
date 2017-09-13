@@ -73,7 +73,11 @@ MODx.grid.SettingsGrid = function(config) {
         ,cls: 'x-form-filter-clear'
         ,text: _('filter_clear')
         ,listeners: {
-            'click': {fn: this.clearFilter, scope: this}
+            'click': {fn: this.clearFilter, scope: this},
+            'mouseout': { fn: function(evt){
+                   this.removeClass('x-btn-focus');
+                }
+            }
         }
     });
 
@@ -151,7 +155,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,primaryKey: 'key'
         ,autosave: true
         ,save_action: 'system/settings/updatefromgrid'
-        ,pageSize: parseInt(MODx.config.default_per_page) > 30 ? parseInt(MODx.config.default_per_page) : 30
+        ,pageSize: parseInt(MODx.config.default_per_page) || 20
         ,paging: true
         ,collapseFirst: false
         ,tools: [{

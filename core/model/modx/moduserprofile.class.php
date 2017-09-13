@@ -36,8 +36,13 @@ use xPDO\Om\xPDOSimpleObject;
  * @see modUser
  * @package modx
  */
+<<<<<<< HEAD
 
 class modUserProfile extends xPDOSimpleObject {
+=======
+class modUserProfile extends xPDOSimpleObject
+{
+>>>>>>> 3.x
 
     /**
      * Overrides xPDOObject::save to fire modX-specific events.
@@ -97,3 +102,7 @@ class modUserProfile extends xPDOSimpleObject {
 
 
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3.x

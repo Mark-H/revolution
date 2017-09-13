@@ -1099,13 +1099,20 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      *
      * @access public
      * @param mixed $resourceGroupPk Either the ID, name or object of the Resource Group
+     * @param boolean $byName Force the criteria to check by name for Numeric usergroup's name
      * @return boolean True if successful.
      */
-    public function joinGroup($resourceGroupPk) {
+    public function joinGroup($resourceGroupPk, $byName = false) {
         if (!is_object($resourceGroupPk) && !($resourceGroupPk instanceof modResourceGroup)) {
-            $c = array(
-                is_int($resourceGroupPk) ? 'id' : 'name' => $resourceGroupPk,
-            );
+            if ($byName) {
+                $c = array(
+                    'name' => $resourceGroupPk,
+                );
+            } else {
+                $c = array(
+                    is_int($resourceGroupPk) ? 'id' : 'name' => $resourceGroupPk,
+                );
+            }
             /** @var modResourceGroup $resourceGroup */
             $resourceGroup = $this->xpdo->getObject('modResourceGroup',$c);
             if (empty($resourceGroup) || !is_object($resourceGroup) || !($resourceGroup instanceof modResourceGroup)) {

@@ -42,7 +42,11 @@ class modExtensionPackage extends xPDOSimpleObject {
      * @param xPDO|modX $modx
      * @return array|mixed
      */
+<<<<<<< HEAD
     public static function loadCache(MODX\modX $modx) {
+=======
+    public static function loadCache(xPDO &$modx) {
+>>>>>>> 3.x
         if (!$modx->getCacheManager()) {
             return array();
         }

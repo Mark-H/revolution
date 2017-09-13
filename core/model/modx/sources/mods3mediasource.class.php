@@ -58,9 +58,15 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         if (!empty($region)) {
             $this->driver->set_region($region);
         }
+<<<<<<< HEAD
         
         $this->setBucket($this->xpdo->getOption('bucket',$properties,''));
         
+=======
+
+        $this->setBucket($this->xpdo->getOption('bucket',$properties,''));
+
+>>>>>>> 3.x
         return true;
     }
 
@@ -157,7 +163,11 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $imagesExts = explode(',',$imagesExts);
 
         $hideTooltips = !empty($properties['hideTooltips']) && $properties['hideTooltips'] != 'false' ? true : false;
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 3.x
         $directories = array();
         $dirnames = array();
         $files = array();
