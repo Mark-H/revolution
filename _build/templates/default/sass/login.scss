@@ -113,7 +113,9 @@ form {
 }
 
 .is-hidden {
-  max-height: 0
+  max-height: 0;
+  visibility: hidden;
+  transition: max-height 0.4s ease-in-out, 0s visibility 0.7s;
 }
 
 input {
