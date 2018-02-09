@@ -33,7 +33,7 @@
             <img alt="MODX CMS/CMF" src="{$_config.manager_url}templates/default/images/modx-logo-color.svg" class="modx-logo">
 
             <form class="modx-login-form" action="" method="post">
-                <h1><strong>Good morning</strong>, welcome back!</h1>
+                <h1>{$greeting}</h1>
                 <p>Feel free to login anytime.</p>
 
                 <label>
