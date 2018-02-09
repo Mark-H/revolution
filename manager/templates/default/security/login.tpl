@@ -30,7 +30,7 @@
         {$onManagerLoginFormPrerender}
 
         <main>
-            <img alt="MODX CMS/CMF" src="{$_config.manager_url}templates/default/images/modx-logo-color.svg" class="modx-logo">
+            <img alt="MODX CMS/CMF" src="{$logo}" class="modx-logo">
             <a href="#help" class="help-link">Help</a>
 
             <h1>{$greeting}</h1>
@@ -98,6 +98,6 @@
             
         </main>
 
-        <div class="background" style="background-image:url({$_config.manager_url}templates/default/images/login/default-background.jpg)"></div>
+        <div class="background" style="background-image:url({$backgroudn})"></div>
     </body>
 </html>
