@@ -51,6 +51,7 @@ body {
 main {
   background: $white;
   width: 30rem;
+  max-width: 100%;
   min-height: 100vh;
   padding: 3.125rem;
   overflow: hidden;
@@ -80,6 +81,9 @@ h1 {
 
 p {
   margin: 0 0 1rem;
+}
+
+.lead {
   font-size: 1.1rem;
 }
 
@@ -132,6 +136,13 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
+.modx-fl-link {
+  display: block;
+  margin: 1rem 0;
+  text-align: center;
+  color: $primary1;
+  text-decoration: none;
+}
 
 
 /*

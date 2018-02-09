@@ -35,7 +35,7 @@
             <h1>{$greeting}</h1>
 
             <form class="modx-login-form" action="" method="post">
-                <p>{$_lang.login_note}</p>
+                <p class="lead">{$_lang.login_note}</p>
 
                 <label>
                     {$_lang.login_username}
@@ -53,7 +53,28 @@
                 </label>
 
                 <button class="button" name="login" type="submit" value="1">{$_lang.login_button}</button>
+
+                {if $allow_forgot_password|default}
+                    <p><a href="javascript:void(0);" id="modx-fl-link" class="modx-fl-link" style="{if $_post.username_reset|default}display:none;{/if}">{$_lang.login_forget_your_login}</a></p>
+                {/if}
             </form>
+
+            {if $allow_forgot_password|default}
+                <div class="modx-forgot-login">
+                    <form action="" method="post" style="{if NOT $_post.username_reset|default}display: none;{/if}">
+                        <label>
+                            {$_lang.login_username_or_email}
+                            <input type="text" id="modx-login-username-reset" name="username_reset" class="x-form-text x-form-field" value="{$_post.username_reset|default}">
+                        </label>
+
+                        <button class="button" name="forgotlogin" type="submit" value="1" id="modx-fl-btn">{$_lang.login_send_activation_email}</button>
+                    </form>
+                </div>
+            {/if}
+
+
+
+            
         </main>
 
         <div class="background" style="background-image:url({$_config.manager_url}templates/default/images/login/default-background.jpg)"></div>
