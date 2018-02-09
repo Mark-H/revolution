@@ -17,6 +17,11 @@ html {
 
 *, *:before, *:after {
   box-sizing: inherit;
+  outline: 0;
+}
+
+*:focus {
+  box-shadow: 0 0 0 0.125rem $blue !important;
 }
 
 body, h1, h2, h3, h4, h5, h6, p, ol, ul {
@@ -51,6 +56,18 @@ main {
   overflow: hidden;
 }
 
+html[dir="rtl"] {
+  main {
+    margin-right: 0;
+    margin-left: auto;
+  }
+
+  .background {
+    left: 0;
+    right: auto;
+  }
+}
+
 .modx-logo {
   max-width: 100%;
   width: 10rem;
@@ -82,6 +99,7 @@ label {
   display: block;
   margin: 1.5rem 0;
   color: $darkestGray;
+  cursor: pointer;
 }
 
 input {
@@ -99,7 +117,7 @@ input[type="checkbox"] {
   width: auto;
   margin: 0 0.5rem 0 0;
   position: relative;
-  top: -0.0625rem
+  top: -0.125rem
 }
 
 .button {
@@ -111,6 +129,7 @@ input[type="checkbox"] {
   border-radius: 0.25rem;
   color: $white;
   font-size: 1rem;
+  cursor: pointer;
 }
 
 
