@@ -67,6 +67,10 @@ class SecurityLoginManagerController extends modManagerController {
         $background = $this->modx->getOption('login_logo', null, $managerUrl . 'templates/default/images/modx-logo-color.svg', true);
         $this->setPlaceholder('logo', $background);
 
+        $this->setPlaceholder('help_button_text', $this->modx->getOption('login_help_button_text'));
+        $this->setPlaceholder('help_title', $this->modx->getOption('login_help_title'));
+        $this->setPlaceholder('help_text', $this->modx->getOption('login_help_text'));
+
         // -6 night
         // 6-12 morning
         // 12-18 afternoon

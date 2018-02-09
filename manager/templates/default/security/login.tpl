@@ -31,14 +31,14 @@
 
         <main>
             <img alt="MODX CMS/CMF" src="{$logo}" class="modx-logo">
-            <a href="#help" class="help-link">Help</a>
-
-            <h1>{$greeting}</h1>
+            <a href="#help" class="help-link">{$_lang.login_help_button_text}</a>
 
             <div id="help">
-                <h2>Help</h2>
-                <p>Lorem Ipsum dolor sit amet</p>
+                <h2>{$_lang.login_help_title}</h2>
+                {$_lang.login_help_text}
             </div>
+
+            <h1>{$greeting}</h1>
 
             <form id="modx-login-form" class="can-toggle {if $_post.username_reset|default}is-hidden{/if}" action="" method="post">
                 <input type="hidden" name="login_context" value="mgr" />
