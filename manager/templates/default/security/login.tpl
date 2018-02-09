@@ -60,6 +60,8 @@
                     {$_lang.login_remember}
                 </label>
 
+                {$onManagerLoginFormRender}
+
                 <button class="button" name="login" type="submit" value="1">{$_lang.login_button}</button>
 
                 {if $allow_forgot_password|default}
