@@ -91,6 +91,15 @@ form {
   margin: 2rem 0 1rem;
 }
 
+.is-visible {
+  max-height: 32rem;
+  transition: max-height 0.4s ease-in-out;
+}
+
+.is-hidden {
+  max-height: 0
+}
+
 input {
   font-size: 1rem;
   padding: 1rem;
