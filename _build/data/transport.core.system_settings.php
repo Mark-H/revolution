@@ -1079,6 +1079,24 @@ $settings['manager_login_url_alternate']->fromArray(array (
   'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
+$settings['login_background_image']= $xpdo->newObject('modSystemSetting');
+$settings['login_background_image']->fromArray(array (
+  'key' => 'login_background_image',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'authentication',
+  'editedon' => null,
+), '', true, true);
+$settings['login_logo']= $xpdo->newObject('modSystemSetting');
+$settings['login_logo']->fromArray(array (
+  'key' => 'login_logo',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'authentication',
+  'editedon' => null,
+), '', true, true);
 $settings['manager_theme']= $xpdo->newObject('modSystemSetting');
 $settings['manager_theme']->fromArray(array (
   'key' => 'manager_theme',

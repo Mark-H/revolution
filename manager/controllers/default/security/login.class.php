@@ -60,6 +60,13 @@ class SecurityLoginManagerController extends modManagerController {
         }
         $this->setPlaceholder('greeting', $greeting);
 
+        $managerUrl = $this->modx->getOption('manager_url');
+        $background = $this->modx->getOption('login_background_image', null, $managerUrl . 'templates/default/images/login/default-background.jpg', true);
+        $this->setPlaceholder('background', $background);
+
+        $background = $this->modx->getOption('login_logo', null, $managerUrl . 'templates/default/images/modx-logo-color.svg', true);
+        $this->setPlaceholder('logo', $background);
+
         // -6 night
         // 6-12 morning
         // 12-18 afternoon
