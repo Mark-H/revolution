@@ -55,12 +55,14 @@
                 <button class="button" name="login" type="submit" value="1">{$_lang.login_button}</button>
 
                 {if $allow_forgot_password|default}
-                    <button class="button forgotpassword" id="modx-fl-link" name="forgotpassword">{$_lang.login_forget_your_login}</button>
+                    <button class="button outline" id="modx-fl-link" name="forgotpassword">{$_lang.login_forget_your_login}</button>
                 {/if}
             </form>
 
             {if $allow_forgot_password|default}
                 <form action="" method="post" id="modx-forgot-login-form" class="can-toggle {if NOT $_post.username_reset|default}is-hidden{/if}">
+                    <p class="lead">{$_lang.forgotpassword_note}</p>
+                    
                     <label>
                         {$_lang.login_username_or_email}
                         <input type="text" id="modx-login-username-reset" name="username_reset" class="x-form-text x-form-field" value="{$_post.username_reset|default}">
@@ -69,7 +71,7 @@
                     <button class="button" name="forgotlogin" type="submit" value="1" id="modx-fl-btn">{$_lang.login_send_activation_email}</button>
 
                     {if $allow_forgot_password|default}
-                        <button name="modx-fl-back-to-login-link" id="modx-fl-back-to-login-link" class="button" style="{if $_post.username_reset|default}display:none;{/if}">{$_lang.login_back_to_login}</button>
+                        <button name="modx-fl-back-to-login-link" id="modx-fl-back-to-login-link" class="button outline" style="{if $_post.username_reset|default}display:none;{/if}">{$_lang.login_back_to_login}</button>
                     {/if}
                 </form>
             {/if}
