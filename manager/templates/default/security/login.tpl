@@ -34,7 +34,7 @@
 
             <form class="modx-login-form" action="" method="post">
                 <h1>{$greeting}</h1>
-                <p>Feel free to login anytime.</p>
+                <p>{$_lang.login_note}</p>
 
                 <label>
                     {$_lang.login_username}

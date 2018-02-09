@@ -36,3 +36,4 @@ $_lang['login_greeting_morning'] = '<strong>Good morning</strong>, welcome back!
 $_lang['login_greeting_afternoon'] = '<strong>Good afternoon</strong>, welcome back!';
 $_lang['login_greeting_evening'] = '<strong>Good evening</strong>, welcome back!';
 $_lang['login_greeting_night'] = '<strong>Good night</strong>, welcome back!';
+$_lang['login_note'] = 'Feel free to login anytime.';
