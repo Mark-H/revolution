@@ -97,9 +97,6 @@ p {
 .lead {
   font-size: 1.1rem; }
 
-form {
-  margin: 2rem 0 1rem; }
-
 .can-toggle {
   max-height: 32rem;
   overflow: hidden;
