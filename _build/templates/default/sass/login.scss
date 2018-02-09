@@ -88,7 +88,7 @@ p {
 }
 
 form {
-  margin: 2rem 0;
+  margin: 2rem 0 1rem;
 }
 
 input {
@@ -97,7 +97,6 @@ input {
   box-shadow: none;
   border: 1px solid $lightGray;
 }
-
 
 label {
   display: block;
@@ -136,12 +135,9 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-.modx-fl-link {
-  display: block;
-  margin: 1rem 0;
-  text-align: center;
+.button.forgotpassword {
   color: $primary1;
-  text-decoration: none;
+  background: transparent;
 }
 
 
