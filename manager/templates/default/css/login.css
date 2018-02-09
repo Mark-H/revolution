@@ -97,9 +97,6 @@ p {
 .lead {
   font-size: 1.1rem; }
 
-form {
-  margin: 2rem 0 1rem; }
-
 .can-toggle {
   max-height: 32rem;
   overflow: hidden;
@@ -136,7 +133,9 @@ input[type="checkbox"] {
   top: -0.125rem; }
 
 .button {
+  display: block;
   width: 100%;
+  margin: 1rem 0;
   padding: 1rem;
   background: #32AB9A;
   box-shadow: none;
