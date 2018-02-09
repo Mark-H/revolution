@@ -124,7 +124,7 @@ label {
 input {
   display: inline-block;
   width: 100%;
-  border-radius: 0.25rem;
+  border-radius: 3px;
   outline-color: #32AB9A; }
 
 label > input {
@@ -144,7 +144,7 @@ input[type="checkbox"] {
   background: #32AB9A;
   box-shadow: none;
   border: 1px solid #268476;
-  border-radius: 0.25rem;
+  border-radius: 3px;
   color: #FFF;
   font-size: 1rem;
   cursor: pointer; }
@@ -152,6 +152,12 @@ input[type="checkbox"] {
 .button.outline {
   color: #32AB9A;
   background: transparent; }
+
+p.error {
+  color: #BE0000;
+  border: 0.125rem solid #BE0000;
+  padding: 1rem;
+  border-radius: 3px; }
 
 /*
 html {
