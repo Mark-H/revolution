@@ -35,6 +35,10 @@
             <h1>{$greeting}</h1>
 
             <form id="modx-login-form" class="can-toggle {if $_post.username_reset|default}is-hidden{/if}" action="" method="post">
+                <input type="hidden" name="login_context" value="mgr" />
+                <input type="hidden" name="modahsh" value="{$modahsh|default}" />
+                <input type="hidden" name="returnUrl" value="{$returnUrl}" />
+
                 <p class="lead">{$_lang.login_note}</p>
 
                 {if $error_message|default}
