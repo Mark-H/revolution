@@ -52,7 +52,7 @@ body {
 
 .background {
   z-index: -1;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
@@ -67,17 +67,23 @@ main {
   background: #FFF;
   width: 30rem;
   min-height: 100vh;
-  padding: 3.125rem; }
+  padding: 3.125rem;
+  overflow: hidden; }
 
 .modx-logo {
   max-width: 100%;
   width: 10rem; }
 
 h1 {
-  margin: 3rem 0 1rem; }
+  margin: 3rem 0 1rem;
+  font-size: 1.5rem; }
 
 p {
-  margin: 0 0 1rem; }
+  margin: 0 0 1rem;
+  font-size: 1.1rem; }
+
+form {
+  margin: 2rem 0; }
 
 input {
   font-size: 1rem;
@@ -87,15 +93,33 @@ input {
 
 label {
   display: block;
-  margin: 1rem 0; }
+  margin: 1.5rem 0;
+  color: #53595F; }
 
 input {
-  display: block;
+  display: inline-block;
   width: 100%;
-  border-radius: 0.25rem; }
+  border-radius: 0.25rem;
+  outline-color: #32AB9A; }
+
+label > input {
+  margin-top: 0.25rem; }
+
+input[type="checkbox"] {
+  width: auto;
+  margin: 0 0.5rem 0 0;
+  position: relative;
+  top: -0.0625rem; }
 
 .button {
-  background: #32AB9A; }
+  width: 100%;
+  padding: 1rem;
+  background: #32AB9A;
+  box-shadow: none;
+  border: 1px solid #268476;
+  border-radius: 0.25rem;
+  color: #FFF;
+  font-size: 1rem; }
 
 /*
 html {

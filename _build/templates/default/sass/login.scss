@@ -31,7 +31,7 @@ body {
 
 .background {
   z-index: -1;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
@@ -48,6 +48,7 @@ main {
   width: 30rem;
   min-height: 100vh;
   padding: 3.125rem;
+  overflow: hidden;
 }
 
 .modx-logo {
@@ -57,10 +58,16 @@ main {
 
 h1 {
   margin: 3rem 0 1rem;
+  font-size: 1.5rem;
 }
 
 p {
   margin: 0 0 1rem;
+  font-size: 1.1rem;
+}
+
+form {
+  margin: 2rem 0;
 }
 
 input {
@@ -73,17 +80,37 @@ input {
 
 label {
   display: block;
-  margin: 1rem 0;
+  margin: 1.5rem 0;
+  color: $darkestGray;
 }
 
 input {
-  display: block;
+  display: inline-block;
   width: 100%;
   border-radius: 0.25rem;
+  outline-color: $primary1;
+}
+
+label > input {
+  margin-top: 0.25rem;
+}
+
+input[type="checkbox"] {
+  width: auto;
+  margin: 0 0.5rem 0 0;
+  position: relative;
+  top: -0.0625rem
 }
 
 .button {
+  width: 100%;
+  padding: 1rem;
   background: $primary1;
+  box-shadow: none;
+  border: 1px solid darken($primary1, 10%);
+  border-radius: 0.25rem;
+  color: $white;
+  font-size: 1rem;
 }
 
 
