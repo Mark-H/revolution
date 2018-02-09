@@ -53,7 +53,7 @@
 
                 <label>
                     {$_lang.login_username}
-                    <input type="text" name="username" autocomplete="on" autofocus value="{$_post.username|default}" required>
+                    <input type="text" id="modx-login-username" name="username" autocomplete="on" autofocus value="{$_post.username|default}" required>
                 </label>
 
                 <label>

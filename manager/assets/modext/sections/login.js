@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var forgotPassBtn = document.getElementById('modx-fl-link'),
         backToLoginBtn = document.getElementById('modx-fl-back-to-login-link'),
         loginForm = document.getElementById('modx-login-form'),
-        resetForm = document.getElementById('modx-forgot-login-form');
+        loginFormUser = document.getElementById('modx-login-username'),
+        resetForm = document.getElementById('modx-forgot-login-form'),
+        resetFormUser = document.getElementById('modx-login-username-reset');
 
     // When clicking on the forgot password button, swap out the forms
     forgotPassBtn.addEventListener('click', function(e) {
@@ -16,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
         removeClass(loginForm, 'is-visible');
         addClass(resetForm, 'is-visible');
         removeClass(resetForm, 'is-hidden');
+        resetFormUser.focus();
         return false;
     });
 
@@ -26,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
         removeClass(loginForm, 'is-hidden');
         addClass(resetForm, 'is-hidden');
         removeClass(resetForm, 'is-visible');
+        loginFormUser.focus();
         return false;
     });
 
