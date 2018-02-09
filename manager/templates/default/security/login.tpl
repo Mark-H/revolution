@@ -21,8 +21,7 @@
     {/if}
     <script src="{$_config.manager_url}assets/modext/core/modx.js" type="text/javascript"></script>
     <script src="{$_config.manager_url}assets/modext/modx.jsgrps-min.js" type="text/javascript"></script>
-
-    <script src="assets/modext/sections/login.js" type="text/javascript"></script>
+    <script src="{$_config.manager_url}assets/modext/sections/login.js" type="text/javascript"></script>
 
     <meta name="robots" content="noindex, nofollow" />
 </head>
