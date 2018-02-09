@@ -51,6 +51,7 @@ body {
 $content-padding: 3.125rem;
 
 main {
+  position: relative;
   background: $white;
   width: 30rem;
   max-width: 100%;
@@ -82,8 +83,19 @@ h1 {
   font-size: 1.5rem;
 }
 
+h2 {
+  margin: 1.5rem 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
 p {
   margin: 0 0 1rem;
+}
+
+a {
+  color: $primary1;
+  text-decoration: none;
 }
 
 .lead {
@@ -95,7 +107,7 @@ form {
 }
 
 .can-toggle {
-  max-height: 40rem;
+  max-height: 50rem;
   overflow: hidden;
   transition: max-height 0.4s ease-in-out;
 }
@@ -160,6 +172,23 @@ p.error {
   border: 0.125rem solid $red;
   padding: 1rem;
   border-radius: $borderRadius;
+}
+
+.help-link {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  padding: 4.375rem $content-padding 1.5rem 1.5rem;
+}
+
+#help {
+  display: none;
+  margin: 2rem $content-padding;
+
+  &:focus, &:target {
+    display: block;
+  }
 }
 
 
