@@ -100,8 +100,9 @@ p {
 form {
   margin: 2rem 0 1rem; }
 
-.is-visible {
+.can-toggle {
   max-height: 32rem;
+  overflow: hidden;
   transition: max-height 0.4s ease-in-out; }
 
 .is-hidden {

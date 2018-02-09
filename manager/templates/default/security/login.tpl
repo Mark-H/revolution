@@ -34,7 +34,7 @@
 
             <h1>{$greeting}</h1>
 
-            <form id="modx-login-form" action="" method="post">
+            <form id="modx-login-form" class="can-toggle" action="" method="post">
                 <p class="lead">{$_lang.login_note}</p>
 
                 <label>
@@ -60,18 +60,18 @@
             </form>
 
             {if $allow_forgot_password|default}
-                <form action="" method="post" id="modx-forgot-login-form" {if $_post.username_reset|default}class="is-hidden"{/if}">
+                <form action="" method="post" id="modx-forgot-login-form" class="can-toggle {if NOT $_post.username_reset|default}is-hidden{/if}">
                     <label>
                         {$_lang.login_username_or_email}
                         <input type="text" id="modx-login-username-reset" name="username_reset" class="x-form-text x-form-field" value="{$_post.username_reset|default}">
                     </label>
 
                     <button class="button" name="forgotlogin" type="submit" value="1" id="modx-fl-btn">{$_lang.login_send_activation_email}</button>
-                </form>
 
-                {if $allow_forgot_password|default}
-                    <button href="javascript:void(0);" id="modx-fl-back-to-login-link" class="button is-hidden" style="{if $_post.username_reset|default}display:none;{/if}">{$_lang.login_back_to_login}</button>
-                {/if}
+                    {if $allow_forgot_password|default}
+                        <button href="javascript:void(0);" id="modx-fl-back-to-login-link" class="button is-hidden" style="{if $_post.username_reset|default}display:none;{/if}">{$_lang.login_back_to_login}</button>
+                    {/if}
+                </form>
             {/if}
 
 
