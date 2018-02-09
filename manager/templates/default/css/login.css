@@ -136,7 +136,9 @@ input[type="checkbox"] {
   top: -0.125rem; }
 
 .button {
+  display: block;
   width: 100%;
+  margin: 1rem 0;
   padding: 1rem;
   background: #32AB9A;
   box-shadow: none;
