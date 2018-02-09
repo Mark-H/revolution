@@ -1,16 +1,15 @@
-Ext.onReady(function() {
+document.addEventListener('DOMContentLoaded', function() {
+    // Break out of frames
     if (top.frames.length !== 0) {
         top.location=self.document.location;
     }
-    // Ext.override(Ext.form.Field,{
-    //     defaultAutoCreate: {tag: "input", type: "text", size: "20", autocomplete: "on" }
-    // });
 
     var forgotPassBtn = document.getElementById('modx-fl-link'),
         backToLoginBtn = document.getElementById('modx-fl-back-to-login-link'),
         loginForm = document.getElementById('modx-login-form'),
         resetForm = document.getElementById('modx-forgot-login-form');
 
+    // When clicking on the forgot password button, swap out the forms
     forgotPassBtn.addEventListener('click', function(e) {
         e.preventDefault();
         addClass(loginForm, 'is-hidden');
@@ -20,6 +19,7 @@ Ext.onReady(function() {
         return false;
     });
 
+    // Also swap out in the reverse direction when clicking the back to login button
     backToLoginBtn.addEventListener('click', function(e) {
         e.preventDefault();
         addClass(loginForm, 'is-visible');
@@ -29,23 +29,20 @@ Ext.onReady(function() {
         return false;
     });
 
+    // @todo reimplement language chooser
     // Ext.get('modx-login-language-select').on('change',function(e,cb) {
     //     var p = MODx.getURLParameters();
     //     p.cultureKey = cb.value;
     //     location.href = '?'+Ext.urlEncode(p);
     // });
+
+    function addClass(el, className) {
+        if (el.classList) el.classList.add(className);
+        else if (!hasClass(el, className)) el.className += ' ' + className;
+    }
+
+    function removeClass(el, className) {
+        if (el.classList) el.classList.remove(className);
+        else el.className = el.className.replace(new RegExp('\\b'+ className+'\\b', 'g'), '');
+    }
 });
-
-function hasClass(el, className) {
-    return el.classList ? el.classList.contains(className) : new RegExp('\\b'+ className+'\\b').test(el.className);
-}
-
-function addClass(el, className) {
-    if (el.classList) el.classList.add(className);
-    else if (!hasClass(el, className)) el.className += ' ' + className;
-}
-
-function removeClass(el, className) {
-    if (el.classList) el.classList.remove(className);
-    else el.className = el.className.replace(new RegExp('\\b'+ className+'\\b', 'g'), '');
-}
