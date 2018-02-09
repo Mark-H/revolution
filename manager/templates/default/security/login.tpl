@@ -98,6 +98,6 @@
             
         </main>
 
-        <div class="background" style="background-image:url({$backgroudn})"></div>
+        <div class="background" style="background-image:url({$background})"></div>
     </body>
 </html>
