@@ -44,7 +44,7 @@
 
                 <label>
                     {$_lang.login_password}
-                    <input type="text" name="password" autocomplete="on" required>
+                    <input type="password" name="password" autocomplete="on" required>
                 </label>
 
                 <label>
@@ -55,7 +55,7 @@
                 <button class="button" name="login" type="submit" value="1">{$_lang.login_button}</button>
 
                 {if $allow_forgot_password|default}
-                    <p><a href="javascript:void(0);" id="modx-fl-link" class="is-visible" style="{if $_post.username_reset|default}display:none;{/if}">{$_lang.login_forget_your_login}</a></p>
+                    <button class="button forgotpassword" id="modx-fl-link" name="forgotpassword" style="{if $_post.username_reset|default}display:none;{/if}">{$_lang.login_forget_your_login}</button>
                 {/if}
             </form>
 
@@ -70,7 +70,7 @@
                 </form>
 
                 {if $allow_forgot_password|default}
-                    <p><a href="javascript:void(0);" id="modx-fl-back-to-login-link" class="is-hidden" style="{if $_post.username_reset|default}display:none;{/if}">{$_lang.login_back_to_login}</a></p>
+                    <button href="javascript:void(0);" id="modx-fl-back-to-login-link" class="button is-hidden" style="{if $_post.username_reset|default}display:none;{/if}">{$_lang.login_back_to_login}</button>
                 {/if}
             {/if}
 
