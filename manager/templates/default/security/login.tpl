@@ -35,6 +35,10 @@
             <h1>{$greeting}</h1>
 
             <form id="modx-login-form" class="can-toggle {if $_post.username_reset|default}is-hidden{/if}" action="" method="post">
+                <input type="hidden" name="login_context" value="mgr" />
+                <input type="hidden" name="modahsh" value="{$modahsh|default}" />
+                <input type="hidden" name="returnUrl" value="{$returnUrl}" />
+
                 <p class="lead">{$_lang.login_note}</p>
 
                 {if $error_message|default}
@@ -55,6 +59,8 @@
                     <input type="checkbox" name="rememberme" autocomplete="on" {if $_post.rememberme|default}checked="checked"{/if} value="1">
                     {$_lang.login_remember}
                 </label>
+
+                {$onManagerLoginFormRender}
 
                 <button class="button" name="login" type="submit" value="1">{$_lang.login_button}</button>
 
