@@ -7,18 +7,24 @@ Ext.onReady(function() {
     });    
     var fl = Ext.get('modx-fl-link');
     if (fl) { fl.on('click',MODx.loadFLForm); }
+    var ll = Ext.get('modx-fl-link');
+    if (ll) { ll.on('click',MODx.loadFLForm); }
 
-    var lu = Ext.get('modx-login-username');
-    if (lu) { lu.focus(); }
-
-    Ext.get('modx-login-language-select').on('change',function(e,cb) {
-        var p = MODx.getURLParameters();
-        p.cultureKey = cb.value;
-        location.href = '?'+Ext.urlEncode(p);
-    });
+    // Ext.get('modx-login-language-select').on('change',function(e,cb) {
+    //     var p = MODx.getURLParameters();
+    //     p.cultureKey = cb.value;
+    //     location.href = '?'+Ext.urlEncode(p);
+    // });
 });
 
 MODx.loadFLForm = function(a) {
-    Ext.get('modx-fl-link').ghost().remove();
-    Ext.get('modx-forgot-login-form').slideIn();
+    Ext.get('modx-fl-link').set({'class':'is-hidden'});
+    Ext.get('modx-login-form').set({'class':'is-hidden'});
+    Ext.get('modx-forgot-login-form').set({'class':'is-visible'});
+};
+
+MODx.hideFLForm = function(a) {
+    Ext.get('modx-fl-link').set({'class':'is-visible'});
+    Ext.get('modx-login-form').set({'class':'is-visible'});
+    Ext.get('modx-forgot-login-form').set({'class':'is-hidden'});
 };

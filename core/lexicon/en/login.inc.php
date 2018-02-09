@@ -19,6 +19,7 @@ $_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="http://mo
 $_lang['login_email_label'] = 'Account Email:';
 $_lang['login_err_unknown'] = 'An unknown error occurred while trying to log in.';
 $_lang['login_forget_your_login'] = 'Forgot your Login?';
+$_lang['login_back_to_login'] = 'Back to login';
 $_lang['login_hostname_error'] = 'Your hostname does not point back to your IP address.';
 $_lang['login_message'] = 'Please enter your login credentials to start your Manager session. Your username and password are case-sensitive, so please enter them carefully!';
 $_lang['login_password'] = 'Password';

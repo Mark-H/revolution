@@ -34,7 +34,7 @@
 
             <h1>{$greeting}</h1>
 
-            <form class="modx-login-form" action="" method="post">
+            <form id="modx-login-form" action="" method="post">
                 <p class="lead">{$_lang.login_note}</p>
 
                 <label>
@@ -55,21 +55,23 @@
                 <button class="button" name="login" type="submit" value="1">{$_lang.login_button}</button>
 
                 {if $allow_forgot_password|default}
-                    <p><a href="javascript:void(0);" id="modx-fl-link" class="modx-fl-link" style="{if $_post.username_reset|default}display:none;{/if}">{$_lang.login_forget_your_login}</a></p>
+                    <p><a href="javascript:void(0);" id="modx-fl-link" class="is-visible" style="{if $_post.username_reset|default}display:none;{/if}">{$_lang.login_forget_your_login}</a></p>
                 {/if}
             </form>
 
             {if $allow_forgot_password|default}
-                <div class="modx-forgot-login">
-                    <form action="" method="post" style="{if NOT $_post.username_reset|default}display: none;{/if}">
-                        <label>
-                            {$_lang.login_username_or_email}
-                            <input type="text" id="modx-login-username-reset" name="username_reset" class="x-form-text x-form-field" value="{$_post.username_reset|default}">
-                        </label>
+                <form action="" method="post" id="modx-forgot-login-form" {if $_post.username_reset|default}class="is-hidden"{/if}">
+                    <label>
+                        {$_lang.login_username_or_email}
+                        <input type="text" id="modx-login-username-reset" name="username_reset" class="x-form-text x-form-field" value="{$_post.username_reset|default}">
+                    </label>
 
-                        <button class="button" name="forgotlogin" type="submit" value="1" id="modx-fl-btn">{$_lang.login_send_activation_email}</button>
-                    </form>
-                </div>
+                    <button class="button" name="forgotlogin" type="submit" value="1" id="modx-fl-btn">{$_lang.login_send_activation_email}</button>
+                </form>
+
+                {if $allow_forgot_password|default}
+                    <p><a href="javascript:void(0);" id="modx-fl-back-to-login-link" class="is-hidden" style="{if $_post.username_reset|default}display:none;{/if}">{$_lang.login_back_to_login}</a></p>
+                {/if}
             {/if}
 
 
