@@ -95,7 +95,7 @@ form {
 }
 
 .can-toggle {
-  max-height: 32rem;
+  max-height: 40rem;
   overflow: hidden;
   transition: max-height 0.4s ease-in-out;
 }
@@ -121,7 +121,7 @@ label {
 input {
   display: inline-block;
   width: 100%;
-  border-radius: 0.25rem;
+  border-radius: $borderRadius;
   outline-color: $primary1;
 }
 
@@ -144,7 +144,7 @@ input[type="checkbox"] {
   background: $primary1;
   box-shadow: none;
   border: 1px solid darken($primary1, 10%);
-  border-radius: 0.25rem;
+  border-radius: $borderRadius;
   color: $white;
   font-size: 1rem;
   cursor: pointer;
@@ -153,6 +153,13 @@ input[type="checkbox"] {
 .button.outline {
   color: $primary1;
   background: transparent;
+}
+
+p.error {
+  color: $red;
+  border: 0.125rem solid $red;
+  padding: 1rem;
+  border-radius: $borderRadius;
 }
 
 
