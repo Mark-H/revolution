@@ -38,7 +38,7 @@ $_lang['login_greeting_morning'] = '<strong>Good morning</strong>, welcome back!
 $_lang['login_greeting_afternoon'] = '<strong>Good afternoon</strong>, welcome back!';
 $_lang['login_greeting_evening'] = '<strong>Good evening</strong>, welcome back!';
 $_lang['login_greeting_night'] = '<strong>Good night</strong>, welcome back!';
-$_lang['login_note'] = 'Please login to access the Manager.';
+$_lang['login_note'] = 'Please log in to access the Manager.';
 $_lang['login_help_button_text'] = 'Help';
 $_lang['login_help_title'] = 'Get help with MODX';
 $_lang['login_help_text'] = '<p>Are you in need of professional MODX support? We\'ve curated a whole directory of MODX Professionals for you to approach. You can find those on <a href="https://modx.com/professionals/" target="_blank" rel="noopener" title="Find MODX Professionals on MODX.com">modx.com</a>.</p>';
