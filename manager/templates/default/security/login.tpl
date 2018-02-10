@@ -17,11 +17,11 @@
     <body id="login">
         {$onManagerLoginFormPrerender}
 
-        <main>
-            <img alt="MODX CMS/CMF" src="{$logo}" class="modx-logo">
-            <a href="#help" class="help-link">{$_lang.login_help_button_text}</a>
+        <main class="l-content">
+            <img alt="MODX CMS/CMF" src="{$logo}" class="c-logo">
+            <a href="#help" class="c-helplink">{$_lang.login_help_button_text}</a>
 
-            <div id="help">
+            <div id="help" class="c-help">
                 <h2>{$_lang.login_help_title}</h2>
                 {$_lang.login_help_text}
             </div>
@@ -29,14 +29,14 @@
             <h1>{$greeting}</h1>
 
             <form id="modx-login-form" class="can-toggle {if $_post.username_reset|default}is-hidden{/if}" action="" method="post">
-                <input type="hidden" name="login_context" value="mgr" />
-                <input type="hidden" name="modahsh" value="{$modahsh|default}" />
-                <input type="hidden" name="returnUrl" value="{$returnUrl}" />
+                <input type="hidden" name="login_context" value="mgr">
+                <input type="hidden" name="modahsh" value="{$modahsh|default}">
+                <input type="hidden" name="returnUrl" value="{$returnUrl}">
 
                 <p class="lead">{$_lang.login_note}</p>
 
                 {if $error_message|default}
-                    <p class="error">{$error_message}</p>
+                    <p class="is-error">{$error_message}</p>
                 {/if}
 
                 <label>
@@ -56,10 +56,10 @@
 
                 {$onManagerLoginFormRender}
 
-                <button class="button" id="modx-login-btn" name="login" type="submit" value="1">{$_lang.login_button}</button>
+                <button class="c-button" id="modx-login-btn" name="login" type="submit" value="1">{$_lang.login_button}</button>
 
                 {if $allow_forgot_password|default}
-                    <button class="button outline" id="modx-fl-link" name="forgotpassword">{$_lang.login_forget_your_login}</button>
+                    <button class="c-button c-button--outline" id="modx-fl-link" name="forgotpassword">{$_lang.login_forget_your_login}</button>
                 {/if}
             </form>
 
@@ -68,25 +68,25 @@
                     <p class="lead">{$_lang.login_forgotpassword_note}</p>
 
                     {if $error_message|default}
-                        <p class="error">{$error_message}</p>
+                        <p class="is-error">{$error_message}</p>
                     {/if}
 
                     <label>
                         {$_lang.login_username_or_email}
-                        <input type="text" id="modx-login-username-reset" name="username_reset" class="x-form-text x-form-field" value="{$_post.username_reset|default}">
+                        <input type="text" id="modx-login-username-reset" name="username_reset" value="{$_post.username_reset|default}">
                     </label>
 
-                    <button class="button" name="forgotlogin" type="submit" value="1" id="modx-fl-btn">{$_lang.login_send_activation_email}</button>
+                    <button class="c-button" name="forgotlogin" type="submit" value="1" id="modx-fl-btn">{$_lang.login_send_activation_email}</button>
 
                     {if $allow_forgot_password|default}
-                        <button name="modx-fl-back-to-login-link" id="modx-fl-back-to-login-link" class="button outline">{$_lang.login_back_to_login}</button>
+                        <button name="modx-fl-back-to-login-link" id="modx-fl-back-to-login-link" class="c-button c-button--outline">{$_lang.login_back_to_login}</button>
                     {/if}
                 </form>
             {/if}
 
         </main>
 
-        <div class="background" style="background-image:url({$background})"></div>
+        <div class="l-background" style="background-image:url({$background})"></div>
 
         <script src="{$_config.manager_url}assets/modext/sections/login.js" type="text/javascript"></script>
     </body>

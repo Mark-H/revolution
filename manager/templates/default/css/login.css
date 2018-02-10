@@ -31,9 +31,12 @@
 @-ms-viewport {
   width: device-width; }
 
+/**
+ * CSS Reset
+ */
 html {
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
   font-size: 100%;
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
@@ -54,7 +57,10 @@ body, h1, h2, h3, h4, h5, h6, p, ol, ul {
 body {
   background: #E4E4E4; }
 
-.background {
+/**
+ * Layout styles
+ */
+.l-background {
   display: none;
   z-index: -1;
   position: fixed;
@@ -68,7 +74,7 @@ body {
   background-size: cover;
   opacity: 0.8; }
 
-main {
+.l-content {
   position: relative;
   background: #FFF;
   max-width: 100%;
@@ -76,30 +82,27 @@ main {
   overflow: hidden;
   padding: 0 1.5625rem; }
 
-html[dir="rtl"] main {
+html[dir="rtl"] .l-content {
   margin-right: 0;
   margin-left: auto; }
 
-html[dir="rtl"] .background {
+html[dir="rtl"] .l-background {
   left: 0;
   right: auto; }
 
-@media screen and (min-width: 48em) {
-  main {
-    width: 30rem; }
-  .background {
-    display: block; } }
-
 @media screen and (min-width: 25em) {
-  main {
+  .l-content {
     padding: 0 3.125rem; } }
 
-.modx-logo {
-  display: block;
-  max-width: 100%;
-  width: 10rem;
-  margin: 3.125rem 0 1rem; }
+@media screen and (min-width: 48em) {
+  .l-content {
+    width: 30rem; }
+  .l-background {
+    display: block; } }
 
+/**
+ * Basic Typography
+ */
 h1 {
   margin: 3rem 0 1rem;
   font-size: 1.5rem; }
@@ -123,16 +126,6 @@ a {
 form {
   padding: 0 1rem;
   margin: 0 -1rem; }
-
-.can-toggle {
-  max-height: 50rem;
-  overflow: hidden;
-  transition: max-height 0.4s ease-in-out; }
-
-.is-hidden {
-  max-height: 0;
-  visibility: hidden;
-  transition: max-height 0.4s ease-in-out, 0s visibility 0.7s; }
 
 input {
   font-size: 1rem;
@@ -161,7 +154,16 @@ input[type="checkbox"] {
   position: relative;
   top: -0.125rem; }
 
-.button {
+/**
+ * Components
+ */
+.c-logo {
+  display: block;
+  max-width: 100%;
+  width: 10rem;
+  margin: 3.125rem 0 1rem; }
+
+.c-button {
   display: block;
   width: 100%;
   margin: 1rem 0;
@@ -174,25 +176,38 @@ input[type="checkbox"] {
   font-size: 1rem;
   cursor: pointer; }
 
-.button.outline {
+.c-button--outline {
   color: #32AB9A;
   background: transparent; }
 
-p.error {
-  color: #BE0000;
-  border: 0.125rem solid #BE0000;
-  padding: 1rem;
-  border-radius: 3px; }
-
-.help-link {
+.c-helplink {
   position: absolute;
   top: 3.25rem;
   right: 2.125rem;
   display: block;
   padding: 1rem; }
 
-#help {
+.c-help {
   display: none;
   margin: 3rem 0; }
-  #help:focus, #help:target {
+  .c-help:focus, .c-help:target {
     display: block; }
+
+/**
+ * States
+ */
+.can-toggle {
+  max-height: 50rem;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out; }
+
+.is-hidden {
+  max-height: 0;
+  visibility: hidden;
+  transition: max-height 0.4s ease-in-out, 0s visibility 0.7s; }
+
+.is-error {
+  color: #BE0000;
+  border: 0.125rem solid #BE0000;
+  padding: 1rem;
+  border-radius: 3px; }
