@@ -218,10 +218,7 @@ input[type="checkbox"] {
   font-family: inherit;
   font-size: inherit;
   text-overflow: ellipsis;
-  text-transform: uppercase;
   color: #081922; }
-  .c-languageselect option {
-    text-transform: uppercase; }
 
 /*
 .c-helplink {

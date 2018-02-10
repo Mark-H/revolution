@@ -235,12 +235,7 @@ input[type="checkbox"] {
   font-family: inherit;
   font-size: inherit;
   text-overflow: ellipsis;
-  text-transform: uppercase;
   color: $black;
-
-  option {
-    text-transform: uppercase;
-  }
 }
 
 /*
