@@ -99,7 +99,8 @@ h2 {
   font-weight: bold; }
 
 p {
-  margin: 0 0 1rem; }
+  margin: 0 0 1rem;
+  line-height: 1.4; }
 
 a {
   color: #32AB9A;
