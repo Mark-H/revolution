@@ -71,10 +71,9 @@ class SecurityLoginManagerController extends modManagerController {
         $this->setPlaceholder('help_title', $this->modx->getOption('login_help_title'));
         $this->setPlaceholder('help_text', $this->modx->getOption('login_help_text'));
 
-        // -6 night
-        // 6-12 morning
-        // 12-18 afternoon
-        // 18-24 evening
+        $lifetime = $this->modx->getOption('session_cookie_lifetime', null, 0);
+        $this->setPlaceholder('rememberme', $output = $this->modx->lexicon('login_remember', array('lifetime' => $this->getLifetimeString($lifetime))));
+        
 
         $this->checkForActiveInstallation();
         $this->checkForAllowManagerForgotPassword();
@@ -84,6 +83,65 @@ class SecurityLoginManagerController extends modManagerController {
         $eventInfo= is_array($eventInfo) ? implode("\n", $eventInfo) : (string) $eventInfo;
         $eventInfo= str_replace('\'','\\\'',$eventInfo);
         $this->setPlaceholder('onManagerLoginFormRender', $eventInfo);
+    }
+
+    public function getLifetimeString($diff) {
+        $this->modx->lexicon->load('filters');
+        $agoTS = array();
+
+        $years = intval((floor($diff/31536000)));
+        if ($years) $diff = $diff % 31536000;
+
+        $months = intval((floor($diff/2628000)));
+        if ($months) $diff = $diff % 2628000;
+
+        $weeks = intval((floor($diff/604800)));
+        if ($weeks) $diff = $diff % 604800;
+
+        $days = intval((floor($diff/86400)));
+        if ($days) $diff = $diff % 86400;
+
+        $hours = intval((floor($diff/3600)));
+        if ($hours) $diff = $diff % 3600;
+
+        $minutes = intval((floor($diff/60)));
+        if ($minutes) $diff = $diff % 60;
+
+        $diff = intval($diff);
+        $agoTS = array(
+            'years' => $years,
+            'months' => $months,
+            'weeks' => $weeks,
+            'days' => $days,
+            'hours' => $hours,
+            'minutes' => $minutes,
+            'seconds' => $diff,
+        );
+
+        $ago = array();
+        if (!empty($agoTS['years'])) {
+            $ago[] = $this->modx->lexicon(($agoTS['years'] > 1 ? 'ago_years' : 'ago_year'),array('time' => $agoTS['years']));
+        }
+        if (!empty($agoTS['months'])) {
+            $ago[] = $this->modx->lexicon(($agoTS['months'] > 1 ? 'ago_months' : 'ago_month'),array('time' => $agoTS['months']));
+        }
+        if (!empty($agoTS['weeks']) && empty($agoTS['years'])) {
+            $ago[] = $this->modx->lexicon(($agoTS['weeks'] > 1 ? 'ago_weeks' : 'ago_week'),array('time' => $agoTS['weeks']));
+        }
+        if (!empty($agoTS['days']) && empty($agoTS['months']) && empty($agoTS['years'])) {
+            $ago[] = $this->modx->lexicon(($agoTS['days'] > 1 ? 'ago_days' : 'ago_day'),array('time' => $agoTS['days']));
+        }
+        if (!empty($agoTS['hours']) && empty($agoTS['weeks']) && empty($agoTS['months']) && empty($agoTS['years'])) {
+            $ago[] = $this->modx->lexicon(($agoTS['hours'] > 1 ? 'ago_hours' : 'ago_hour'),array('time' => $agoTS['hours']));
+        }
+        if (!empty($agoTS['minutes']) && empty($agoTS['days']) && empty($agoTS['weeks']) && empty($agoTS['months']) && empty($agoTS['years'])) {
+            $ago[] = $this->modx->lexicon($agoTS['minutes'] == 1 ? 'ago_minute' : 'ago_minutes' ,array('time' => $agoTS['minutes']));
+        }
+        if (empty($ago)) { /* handle <1 min */
+            $ago[] = $this->modx->lexicon('ago_seconds',array('time' => !empty($agoTS['seconds']) ? $agoTS['seconds'] : 0));
+        }
+        $output = implode(', ',$ago);
+        return $output;
     }
 
     /**

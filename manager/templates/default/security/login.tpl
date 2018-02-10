@@ -57,7 +57,7 @@
 
                 <label>
                     <input type="checkbox" id="modx-login-rememberme" name="rememberme" autocomplete="on" {if $_post.rememberme|default}checked="checked"{/if} value="1">
-                    {$_lang.login_remember}
+                    {$rememberme}
                 </label>
 
                 {$onManagerLoginFormRender}
