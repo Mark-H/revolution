@@ -58,17 +58,17 @@
 
                 <label>
                     {$_lang.login_password}
-                    <input type="password" name="password" autocomplete="on" required>
+                    <input type="password" id="modx-login-password" name="password" autocomplete="on" required>
                 </label>
 
                 <label>
-                    <input type="checkbox" name="rememberme" autocomplete="on" {if $_post.rememberme|default}checked="checked"{/if} value="1">
+                    <input type="checkbox" id="modx-login-rememberme" name="rememberme" autocomplete="on" {if $_post.rememberme|default}checked="checked"{/if} value="1">
                     {$_lang.login_remember}
                 </label>
 
                 {$onManagerLoginFormRender}
 
-                <button class="button" name="login" type="submit" value="1">{$_lang.login_button}</button>
+                <button class="button" id="modx-login-btn" name="login" type="submit" value="1">{$_lang.login_button}</button>
 
                 {if $allow_forgot_password|default}
                     <button class="button outline" id="modx-fl-link" name="forgotpassword">{$_lang.login_forget_your_login}</button>
@@ -77,7 +77,7 @@
 
             {if $allow_forgot_password|default}
                 <form action="" method="post" id="modx-forgot-login-form" class="can-toggle {if NOT $_post.username_reset|default}is-hidden{/if}">
-                    <p class="lead">{$_lang.forgotpassword_note}</p>
+                    <p class="lead">{$_lang.login_forgotpassword_note}</p>
 
                     {if $error_message|default}
                         <p class="error">{$error_message}</p>
@@ -95,7 +95,7 @@
                     {/if}
                 </form>
             {/if}
-            
+
         </main>
 
         <div class="background" style="background-image:url({$background})"></div>
