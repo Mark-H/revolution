@@ -14,7 +14,7 @@ $content-padding: 1.5625rem;
 
 html {
   box-sizing: border-box;
-  font-family: "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-family: $bodyfonts;
   font-size: 100%;
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
@@ -34,6 +34,7 @@ body, h1, h2, h3, h4, h5, h6, p, ol, ul {
   margin: 0;
   padding: 0;
   font-weight: normal;
+  color: $black;
 }
 
 body {
@@ -197,22 +198,59 @@ input[type="checkbox"] {
   background: transparent;
 }
 
+.c-help {
+  display: none;
+  margin: 3rem 0;
+  border: 0.125rem solid $primary1;
+  padding: 0 1rem;
+  border-radius: $borderRadius;
+
+  &:focus, &:target {
+    display: block;
+  }
+}
+
+.c-nav {
+  position: fixed;
+  top: 0;
+  left: 30rem;
+}
+
+.c-nav__item {
+  display: block;
+  margin: 1rem;
+  padding: 0.5rem 0.75rem;
+  background: $white;
+}
+
+.c-languageselect {
+  height: auto;
+  width: auto;
+  border: none;
+  border-radius: 0;
+  background: $white;
+  user-select: none;
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  color: $black;
+
+  option {
+    text-transform: uppercase;
+  }
+}
+
+/*
 .c-helplink {
   position: absolute;
   top: 3.25rem;
   right: ($content-padding*2 - 1rem);
   display: block;
   padding: 1rem;
-}
-
-.c-help {
-  display: none;
-  margin: 3rem 0;
-
-  &:focus, &:target {
-    display: block;
-  }
-}
+}*/
 
 
 /**

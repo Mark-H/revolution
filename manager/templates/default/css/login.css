@@ -52,7 +52,8 @@ html {
 body, h1, h2, h3, h4, h5, h6, p, ol, ul {
   margin: 0;
   padding: 0;
-  font-weight: normal; }
+  font-weight: normal;
+  color: #081922; }
 
 body {
   background: #E4E4E4; }
@@ -180,19 +181,56 @@ input[type="checkbox"] {
   color: #32AB9A;
   background: transparent; }
 
-.c-helplink {
-  position: absolute;
-  top: 3.25rem;
-  right: 2.125rem;
-  display: block;
-  padding: 1rem; }
-
 .c-help {
   display: none;
-  margin: 3rem 0; }
+  margin: 3rem 0;
+  border: 0.125rem solid #32AB9A;
+  padding: 0 1rem;
+  border-radius: 3px; }
   .c-help:focus, .c-help:target {
     display: block; }
 
+.c-nav {
+  position: fixed;
+  top: 0;
+  left: 30rem; }
+
+.c-nav__item {
+  display: block;
+  margin: 1rem;
+  padding: 0.5rem 0.75rem;
+  background: #FFF; }
+
+.c-languageselect {
+  height: auto;
+  width: auto;
+  border: none;
+  border-radius: 0;
+  background: #FFF;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  color: #081922; }
+  .c-languageselect option {
+    text-transform: uppercase; }
+
+/*
+.c-helplink {
+  position: absolute;
+  top: 3.25rem;
+  right: ($content-padding*2 - 1rem);
+  display: block;
+  padding: 1rem;
+}*/
 /**
  * States
  */
