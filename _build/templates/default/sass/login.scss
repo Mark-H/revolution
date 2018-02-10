@@ -176,7 +176,13 @@ input[type="checkbox"] {
   display: block;
   max-width: 100%;
   width: 10rem;
-  margin: $content-padding*2 0 1rem;
+  margin: $content-padding 0 1rem;
+}
+
+@media screen and (min-width: 48em) {
+  .c-logo {
+    margin: $content-padding*2 0 1rem;
+  }
 }
 
 .c-button {
@@ -211,31 +217,51 @@ input[type="checkbox"] {
 }
 
 .c-nav {
-  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: static;
   top: 0;
   left: 30rem;
+  padding: 1rem;
+  background: $white;
+  font-size: 0;
 }
 
 .c-nav__item {
-  display: block;
-  margin: 1rem;
+  display: inline-block;
+  width: 49%;
   padding: 0.5rem 0.75rem;
-  background: $white;
+  background: $lighterGray;
+  font-size: 1rem;
+}
+
+@media screen and (min-width: 48em) {
+  .c-nav {
+    display: block;
+    position: fixed;
+    background: transparent;
+  }
+
+  .c-nav__item {
+    display: block;
+    background: $white;
+    min-width: 10rem;
+    width: auto;
+    margin-bottom: 1rem;
+  }
 }
 
 .c-languageselect {
   height: auto;
-  width: auto;
   border: none;
   border-radius: 0;
-  background: $white;
   user-select: none;
   appearance: none;
   cursor: pointer;
   font-family: inherit;
-  font-size: inherit;
   text-overflow: ellipsis;
-  color: $black;
+  color: $primary1;
 }
 
 /*

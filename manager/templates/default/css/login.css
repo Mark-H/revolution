@@ -162,7 +162,11 @@ input[type="checkbox"] {
   display: block;
   max-width: 100%;
   width: 10rem;
-  margin: 3.125rem 0 1rem; }
+  margin: 1.5625rem 0 1rem; }
+
+@media screen and (min-width: 48em) {
+  .c-logo {
+    margin: 3.125rem 0 1rem; } }
 
 .c-button {
   display: block;
@@ -191,22 +195,42 @@ input[type="checkbox"] {
     display: block; }
 
 .c-nav {
-  position: fixed;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  position: static;
   top: 0;
-  left: 30rem; }
+  left: 30rem;
+  padding: 1rem;
+  background: #FFF;
+  font-size: 0; }
 
 .c-nav__item {
-  display: block;
-  margin: 1rem;
+  display: inline-block;
+  width: 49%;
   padding: 0.5rem 0.75rem;
-  background: #FFF; }
+  background: #F0F0F0;
+  font-size: 1rem; }
+
+@media screen and (min-width: 48em) {
+  .c-nav {
+    display: block;
+    position: fixed;
+    background: transparent; }
+  .c-nav__item {
+    display: block;
+    background: #FFF;
+    min-width: 10rem;
+    width: auto;
+    margin-bottom: 1rem; } }
 
 .c-languageselect {
   height: auto;
-  width: auto;
   border: none;
   border-radius: 0;
-  background: #FFF;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -216,9 +240,8 @@ input[type="checkbox"] {
           appearance: none;
   cursor: pointer;
   font-family: inherit;
-  font-size: inherit;
   text-overflow: ellipsis;
-  color: #081922; }
+  color: #32AB9A; }
 
 /*
 .c-helplink {

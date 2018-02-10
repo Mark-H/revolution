@@ -101,11 +101,13 @@ class SecurityLoginManagerController extends modManagerController {
 
 
         $languages = $this->modx->lexicon->getLanguageList('core');
+        $this->modx->lexicon->load('core:languages_native');
 
         $list = array();
         foreach ($languages as $language) {
+            $native = $this->modx->lexicon('language_native_'.$language, array() ,'en');
             $selected = $language == $cultureKey ? ' selected="selected"' : '';
-            $list[] = '<option value="'.$language.'"'.$selected.'>'.$language.'</option>';
+            $list[] = '<option lang="'.$language.'" value="'.$language.'"'.$selected.'>'.$native.'</option>';
         }
         $this->setPlaceholder('languages',implode("\n",$list));
 
