@@ -13,18 +13,6 @@
         {/if}
 
         <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/login{if $_config.compress_css}-min{/if}.css" />
-
-        {if isset($_config.ext_debug) && $_config.ext_debug}
-            <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js" type="text/javascript"></script>
-            <script src="{$_config.manager_url}assets/ext3/ext-all-debug.js" type="text/javascript"></script>
-        {else}
-            <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
-            <script src="{$_config.manager_url}assets/ext3/ext-all.js" type="text/javascript"></script>
-        {/if}
-        <script src="{$_config.manager_url}assets/modext/core/modx.js" type="text/javascript"></script>
-        <script src="{$_config.manager_url}assets/modext/modx.jsgrps-min.js" type="text/javascript"></script>
-        <script src="{$_config.manager_url}assets/modext/sections/login.js" type="text/javascript"></script>
-
     </head>
     <body id="login">
         {$onManagerLoginFormPrerender}
@@ -99,5 +87,7 @@
         </main>
 
         <div class="background" style="background-image:url({$background})"></div>
+
+        <script src="{$_config.manager_url}assets/modext/sections/login.js" type="text/javascript"></script>
     </body>
 </html>
