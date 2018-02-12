@@ -18,7 +18,9 @@
         {$onManagerLoginFormPrerender}
 
         <nav class="c-nav">
+            {if $show_help}
             <a href="#help" class="c-nav__item c-helplink">{$_lang.login_help_button_text}</a>
+            {/if}
             <select name="cultureKey" id="modx-login-language-select" class="c-nav__item c-languageselect" aria-label="{$language_str}">
                 {$languages|indent:20}
             </select>
@@ -27,10 +29,12 @@
         <main class="l-content">
             <img alt="MODX CMS/CMF" src="{$logo}" class="c-logo">
 
+            {if $show_help}
             <div id="help" class="c-help">
                 <h2>{$_lang.login_help_title}</h2>
                 {$_lang.login_help_text}
             </div>
+            {/if}
 
             <h1>{$greeting}</h1>
 
