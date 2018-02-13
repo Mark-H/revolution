@@ -2,7 +2,7 @@
 /**
  * Login English lexicon topic
  *
- * @language en
+ * @language ru
  * @package modx
  * @subpackage lexicon
  */
@@ -19,6 +19,11 @@ $_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="http://mo
 $_lang['login_email_label'] = 'Электронная почта учетной записи:';
 $_lang['login_err_unknown'] = 'При попытке авторизации произошла неизвестная ошибка.';
 $_lang['login_forget_your_login'] = 'Забыли своё имя пользователя?';
+$_lang['login_forget_your_login_note'] = 'Если вы хотите поменять пароль, укажите логин или email, чтобы сбросить пароль. Вам на почту придёт проверочная ссылка.';
+$_lang['login_new_password'] = 'Новый пароль';
+$_lang['login_new_password_note'] = 'Пожалуйста, укажите новый пароль дважды, для исключения опечатки.';
+$_lang['login_confirm_password'] = 'Подтверждение пароля';
+$_lang['login_back_to_login'] = 'Назад';
 $_lang['login_hostname_error'] = 'Имя вашего хоста не указывает обратно на ваш IP-адрес.';
 $_lang['login_message'] = 'Пожалуйста, введите ваши учетные данные для входа в панель управления сайтом. Обратите внимание, ваши имя пользователя и пароль чувствительны к регистру!';
 $_lang['login_password'] = 'Пароль';
@@ -31,3 +36,14 @@ $_lang['login_username'] = 'Имя пользователя';
 $_lang['login_username_or_email'] = 'Имя пользователя или электронная почта';
 $_lang['login_username_password_incorrect'] = 'Неправильное имя пользователя или пароль. Пожалуйста, проверьте введённые данные и попытайтесь снова.';
 $_lang['login_user_inactive'] = 'Ваша учётная запись была заблокирована. Пожалуйста, свяжитесь администратором сайта для отмены блокировки.';
+$_lang['login_email_subject'] = 'Ваши учётные данные';
+$_lang['login_forgot_email'] = '<p>Привет [[+username]]!</p><p>Только что поступил запрос на сброс пароля для вашего аккаунта. Если это сделали вы, то пройдите по ссылке и укажите новый пароль. В противном случае просто удалите это письмо.</p><p><strong>Ссылка для сброса:</strong> [[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]<br /></p><p>С уважением,<br />Администратор сайта</p>';
+
+$_lang['login_greeting_morning'] = '<strong>Доброе утро</strong>, с возвращением!';
+$_lang['login_greeting_afternoon'] = '<strong>Добрый день</strong>, с возвращением!';
+$_lang['login_greeting_evening'] = '<strong>Добрый вечер</strong>, с возвращением!';
+$_lang['login_greeting_night'] = '<strong>Доброй ночи</strong>, с возвращением!';
+$_lang['login_note'] = 'Пожалуйста, авторизуйтесь для работы в Менеджере.';
+$_lang['login_help_button_text'] = 'Помощь';
+$_lang['login_help_title'] = 'Помощь с MODX';
+$_lang['login_help_text'] = '<p>Вам нужна профессиональная помощь по MODX? Мы составили целый список таких профессионалов, чтобы вы могли к ним обратиться. Вы можете найти его на <a href="https://modx.com/professionals/" target="_blank" rel="noopener" title="Find MODX Professionals on MODX.com">modx.com</a>.</p>';

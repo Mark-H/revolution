@@ -234,7 +234,7 @@ if ($usemb) {
 /* if language != en, set cultureKey, manager_language, manager_lang_attribute to it */
 $language = $settings->get('language','en');
 if ($language != 'en') {
-    /* cultureKey */
+    // cultureKey
     $setting = $modx->getObject('modSystemSetting',array(
         'key' => 'cultureKey',
     ));
@@ -249,8 +249,8 @@ if ($language != 'en') {
     }
     $setting->set('value',$language);
     $setting->save();
-
-    /* manager_language */
+    /*
+    // manager_language
     $setting = $modx->getObject('modSystemSetting',array(
         'key' => 'manager_language',
     ));
@@ -266,7 +266,7 @@ if ($language != 'en') {
     $setting->set('value',$language);
     $setting->save();
 
-    /* manager_lang_attribute */
+    // manager_lang_attribute
     $setting = $modx->getObject('modSystemSetting',array(
         'key' => 'manager_lang_attribute',
     ));
@@ -281,6 +281,7 @@ if ($language != 'en') {
     }
     $setting->set('value',$language);
     $setting->save();
+    */
 }
 
 /* add ext_debug setting for sdk distro */

@@ -131,9 +131,10 @@ if ($adminPolicy && $adminGroup) {
 }
 unset($adminPolicy,$adminGroup);
 
+/*
 $language = $settings->get('language','en');
 if ($language != 'en') {
-    /* manager_language */
+    // manager_language
     $setting = $modx->getObject('modSystemSetting',array(
         'key' => 'manager_language',
     ));
@@ -149,7 +150,7 @@ if ($language != 'en') {
     $setting->set('value',$language);
     $setting->save();
 
-    /* manager_lang_attribute */
+    // manager_lang_attribute
     $setting = $modx->getObject('modSystemSetting',array(
         'key' => 'manager_lang_attribute',
     ));
@@ -165,6 +166,7 @@ if ($language != 'en') {
     $setting->set('value',$language);
     $setting->save();
 }
+*/
 
 /* Access Policy changes (have to happen post package install) */
 

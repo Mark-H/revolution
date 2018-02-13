@@ -501,7 +501,11 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                         },scope:this}
                     }
                     ,items: [{
-                        xtype: 'radiogroup'
+                        xtype: 'hidden'
+                        ,id: 'modx-user-passwordnotifymethod-s'
+                        ,name: 'passwordnotifymethod'
+                        ,value: 's'
+                        /*
                         ,fieldLabel: _('password_method')
                         ,columns: 1
                         ,items: [{
@@ -519,7 +523,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                             ,value: 's'
                             ,inputValue: 's'
                             ,checked: true
-                        }]
+                        }]*/
                     },{
                         xtype: 'radiogroup'
                         ,fieldLabel: _('password_gen_method')
