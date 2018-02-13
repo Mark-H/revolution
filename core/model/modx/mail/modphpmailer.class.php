@@ -242,7 +242,7 @@ class modPHPMailer extends modMail {
                     }
                 }
                 if (!isset($this->attributes[modMail::MAIL_LANGUAGE])) {
-                    $this->set(modMail::MAIL_LANGUAGE, $this->modx->config['manager_language']);
+                    $this->set(modMail::MAIL_LANGUAGE, $this->modx->config['cultureKey']);
                 }
                 $success= true;
             }
