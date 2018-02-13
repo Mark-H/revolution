@@ -10,10 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
         loginFormUser = document.getElementById('modx-login-username'),
         resetForm = document.getElementById('modx-forgot-login-form'),
         resetFormUser = document.getElementById('modx-login-username-reset'),
-        changeLanguage = document.getElementById('modx-login-language-select'),
+        languageSelector = document.getElementById('modx-login-language-select'),
         errors = document.querySelectorAll('.is-error');
-        resetFormUser = document.getElementById('modx-login-username-reset'),
-        languageSelector = document.getElementById('modx-login-language-select');
 
     // When clicking on the forgot password button, swap out the forms
     if (forgotPassBtn) {
@@ -44,8 +42,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Change language
-    if (changeLanguage) {
-        changeLanguage.addEventListener('change', function (e) {
+    if (languageSelector) {
+        languageSelector.addEventListener('change', function (e) {
             var params = {};
             location.search.substr(1).split('&').forEach(function (item) {
                 if (item != '') {

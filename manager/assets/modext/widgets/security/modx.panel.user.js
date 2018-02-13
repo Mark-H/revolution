@@ -505,25 +505,6 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                         ,id: 'modx-user-passwordnotifymethod-s'
                         ,name: 'passwordnotifymethod'
                         ,value: 's'
-                        /*
-                        ,fieldLabel: _('password_method')
-                        ,columns: 1
-                        ,items: [{
-                            id: 'modx-user-passwordnotifymethod-e'
-                            ,name: 'passwordnotifymethod'
-                            ,boxLabel: _('password_method_email')
-                            ,xtype: 'radio'
-                            ,value: 'e'
-                            ,inputValue: 'e'
-                        },{
-                            id: 'modx-user-passwordnotifymethod-s'
-                            ,name: 'passwordnotifymethod'
-                            ,boxLabel: _('password_method_screen')
-                            ,xtype: 'radio'
-                            ,value: 's'
-                            ,inputValue: 's'
-                            ,checked: true
-                        }]*/
                     },{
                         xtype: 'radiogroup'
                         ,fieldLabel: _('password_gen_method')
