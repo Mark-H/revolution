@@ -101,7 +101,7 @@
                                 <button class="c-button" name="forgotlogin" type="submit" value="1" id="modx-fl-btn">{$_lang.login_send_activation_email}</button>
 
                             {if $allow_forgot_password|default}
-                                <button name="modx-fl-back-to-login-link" id="modx-fl-back-to-login-link" class="c-button c-button--outline">{$_lang.login_back_to_login}</button>
+                                <button name="modx-fl-back-to-login-link" id="modx-fl-back-to-login-link" class="c-button c-button--ghost">{$_lang.login_back_to_login}</button>
                             {/if}
                         </form>
                     {/if}
