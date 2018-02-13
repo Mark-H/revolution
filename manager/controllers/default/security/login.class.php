@@ -67,10 +67,7 @@ class SecurityLoginManagerController extends modManagerController {
         $background = $this->modx->getOption('login_logo', null, $managerUrl . 'templates/default/images/modx-logo-color.svg', true);
         $this->setPlaceholder('logo', $background);
 
-        $this->setPlaceholder('help_button_text', $this->modx->getOption('login_help_button_text'));
-        $this->setPlaceholder('help_title', $this->modx->getOption('login_help_title'));
-        $this->setPlaceholder('help_text', $this->modx->getOption('login_help_text'));
-
+        $this->setPlaceholder('show_help', (int)$this->modx->getOption('login_help_button'));
         $lifetime = $this->modx->getOption('session_cookie_lifetime', null, 0);
         $this->setPlaceholder('rememberme', $output = $this->modx->lexicon('login_remember', array('lifetime' => $this->getLifetimeString($lifetime))));
         
@@ -163,7 +160,7 @@ class SecurityLoginManagerController extends modManagerController {
 
         $list = array();
         foreach ($languages as $language) {
-            $native = $this->modx->lexicon('language_native_'.$language, array() ,'en');
+            $native = $this->modx->lexicon('language_native_'.$language, array());
             $selected = $language == $cultureKey ? ' selected="selected"' : '';
             $list[] = '<option lang="'.$language.'" value="'.$language.'"'.$selected.'>'.$native.'</option>';
         }

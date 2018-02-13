@@ -18,13 +18,15 @@
         {$onManagerLoginFormPrerender}
 
         <nav class="c-nav">
-            <a href="#help" class="c-nav__item c-helplink">{$_lang.login_help_button_text}</a>
-            <div class="c-languageselect c-nav__item c-nav__item--nopadding">
+            {if $show_help}
+                <a href="#help" class="c-nav__item c-helplink">{$_lang.login_help_button_text}</a>
+            {/if}
+            <form method="GET" class="c-languageselect c-nav__item c-nav__item--nopadding">
                 <span class="c-languageselect__arrow"></span>
                 <select name="cultureKey" id="modx-login-language-select" class="c-languageselect__select" aria-label="{$language_str}">
                     {$languages|indent:20}
                 </select>
-            </div>
+            </form>
         </nav>
 
         <div class="l-content">
@@ -33,10 +35,12 @@
             </header>
             
             <main class="l-main">
-                <div id="help" class="c-help">
-                    <h2>{$_lang.login_help_title}</h2>
-                    {$_lang.login_help_text}
-                </div>
+                {if $show_help}
+                    <div id="help" class="c-help">
+                        <h2>{$_lang.login_help_title}</h2>
+                        {$_lang.login_help_text}
+                    </div>
+                {/if}
 
                 <h1>{$greeting}</h1>
 

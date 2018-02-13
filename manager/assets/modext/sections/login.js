@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
         loginForm = document.getElementById('modx-login-form'),
         loginFormUser = document.getElementById('modx-login-username'),
         resetForm = document.getElementById('modx-forgot-login-form'),
-        resetFormUser = document.getElementById('modx-login-username-reset');
+        resetFormUser = document.getElementById('modx-login-username-reset'),
+        languageSelector = document.getElementById('modx-login-language-select');
 
     // When clicking on the forgot password button, swap out the forms
     forgotPassBtn.addEventListener('click', function(e) {
@@ -33,7 +34,11 @@ document.addEventListener('DOMContentLoaded', function() {
         return false;
     });
 
-    // @todo reimplement language chooser
+    languageSelector.addEventListener('change', function() {
+        console.log(this);
+        this.form.submit();
+    });
+
     // Ext.get('modx-login-language-select').on('change',function(e,cb) {
     //     var p = MODx.getURLParameters();
     //     p.cultureKey = cb.value;
