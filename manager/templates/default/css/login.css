@@ -49,7 +49,7 @@ html {
 *:focus {
   box-shadow: 0 0 0 0.125rem #3697cd !important; }
 
-body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+body, h1, h2, h3, h4, h5, h6, p, ol, ul, form {
   margin: 0;
   padding: 0;
   font-weight: normal;
@@ -75,6 +75,9 @@ body {
   background-size: cover;
   opacity: 0.8; }
 
+.l-main {
+  margin: 2rem 0 3rem; }
+
 .l-content {
   position: relative;
   background: #FFF;
@@ -97,6 +100,12 @@ html[dir="rtl"] .l-background {
 
 @media screen and (min-width: 48em) {
   .l-content {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
     width: 30rem; }
   .l-background {
     display: block; } }
@@ -105,7 +114,7 @@ html[dir="rtl"] .l-background {
  * Basic Typography
  */
 h1 {
-  margin: 3rem 0 1rem;
+  margin: 2rem 0 1rem;
   font-size: 1.5rem; }
 
 h2 {
@@ -118,15 +127,12 @@ p {
   line-height: 1.4; }
 
 a {
-  color: #32AB9A;
+  color: #3697cd;
   text-decoration: none; }
 
 .lead {
-  font-size: 1.1rem; }
-
-form {
-  padding: 0 1rem;
-  margin: 0 -1rem; }
+  font-size: 1.1rem;
+  margin-bottom: 3rem; }
 
 input {
   font-size: 1rem;
@@ -168,6 +174,10 @@ input[type="checkbox"] {
   .c-logo {
     margin: 3.125rem 0 1rem; } }
 
+.c-form {
+  padding: 0 1rem;
+  margin: 0 -1rem; }
+
 .c-button {
   display: block;
   width: 100%;
@@ -181,9 +191,10 @@ input[type="checkbox"] {
   font-size: 1rem;
   cursor: pointer; }
 
-.c-button--outline {
-  color: #32AB9A;
-  background: transparent; }
+.c-button--ghost {
+  color: #3697cd;
+  background: transparent;
+  border: none; }
 
 .c-help {
   display: none;
@@ -204,31 +215,44 @@ input[type="checkbox"] {
   position: static;
   top: 0;
   left: 30rem;
+  margin: 0 -0.25rem;
   padding: 1rem;
   background: #FFF;
   font-size: 0; }
 
 .c-nav__item {
+  position: relative;
   display: inline-block;
-  width: 49%;
+  width: 100%;
+  margin: 0 0.25rem;
   padding: 0.5rem 0.75rem;
   background: #F0F0F0;
   font-size: 1rem; }
+
+.c-nav__item--nopadding {
+  padding: 0; }
 
 @media screen and (min-width: 48em) {
   .c-nav {
     display: block;
     position: fixed;
+    margin: 0;
     background: transparent; }
   .c-nav__item {
     display: block;
     background: #FFF;
     min-width: 10rem;
     width: auto;
-    margin-bottom: 1rem; } }
+    margin: 0 0 1rem; } }
 
 .c-languageselect {
+  position: relative; }
+
+.c-languageselect__select {
+  width: 100%;
   height: auto;
+  padding: 0.5rem 0.75rem;
+  background: transparent;
   border: none;
   border-radius: 0;
   -webkit-user-select: none;
@@ -240,17 +264,41 @@ input[type="checkbox"] {
           appearance: none;
   cursor: pointer;
   font-family: inherit;
+  font-size: inherit;
   text-overflow: ellipsis;
-  color: #32AB9A; }
+  color: #3697cd; }
 
-/*
-.c-helplink {
-  position: absolute;
-  top: 3.25rem;
-  right: ($content-padding*2 - 1rem);
+.c-languageselect__arrow {
+  z-index: 1;
   display: block;
-  padding: 1rem;
-}*/
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+  right: 0.5625rem;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0.375rem 0.375rem 0 0.375rem;
+  border-color: #3697cd transparent transparent transparent; }
+
+.c-arrow {
+  stroke: #081922;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+  transition: left 0.4s ease-in-out, right 0.4s ease-in-out;
+  right: 0; }
+  a:hover > .c-arrow {
+    right: -0.5rem; }
+  .c-arrow.c-arrow--left {
+    -ms-transform: rotate(180deg);
+        transform: rotate(180deg);
+    left: 0; }
+    a:hover > .c-arrow.c-arrow--left {
+      left: -0.5rem;
+      right: 0; }
+
 /**
  * States
  */

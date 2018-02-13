@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
         resetFormUser = document.getElementById('modx-login-username-reset'),
         changeLanguage = document.getElementById('modx-login-language-select'),
         errors = document.querySelectorAll('.is-error');
+        resetFormUser = document.getElementById('modx-login-username-reset'),
+        languageSelector = document.getElementById('modx-login-language-select');
 
     // When clicking on the forgot password button, swap out the forms
     if (forgotPassBtn) {

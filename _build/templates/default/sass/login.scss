@@ -30,7 +30,7 @@ html {
   box-shadow: 0 0 0 0.125rem $blue !important;
 }
 
-body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+body, h1, h2, h3, h4, h5, h6, p, ol, ul, form {
   margin: 0;
   padding: 0;
   font-weight: normal;
@@ -58,6 +58,10 @@ body {
   background: $lightGray no-repeat center center;
   background-size: cover;
   opacity: 0.8;
+}
+
+.l-main {
+  margin: 2rem 0 3rem;
 }
 
 .l-content {
@@ -92,6 +96,9 @@ html[dir="rtl"] {
 // larger screen styles (768+ px) with background
 @media screen and (min-width: 48em) {
   .l-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 30rem;
   }
   
@@ -106,7 +113,7 @@ html[dir="rtl"] {
  */
 
 h1 {
-  margin: 3rem 0 1rem;
+  margin: 2rem 0 1rem;
   font-size: 1.5rem;
 }
 
@@ -122,17 +129,13 @@ p {
 }
 
 a {
-  color: $primary1;
+  color: $blue;
   text-decoration: none;
 }
 
 .lead {
   font-size: 1.1rem;
-}
-
-form {
-  padding: 0 1rem;
-  margin: 0 -1rem;
+  margin-bottom: 3rem;
 }
 
 input {
@@ -185,6 +188,11 @@ input[type="checkbox"] {
   }
 }
 
+.c-form {
+  padding: 0 1rem;
+  margin: 0 -1rem;
+}
+
 .c-button {
   display: block;
   width: 100%;
@@ -199,9 +207,10 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-.c-button--outline {
-  color: $primary1;
+.c-button--ghost {
+  color: $blue;
   background: transparent;
+  border: none;
 }
 
 .c-help {
@@ -223,23 +232,31 @@ input[type="checkbox"] {
   position: static;
   top: 0;
   left: 30rem;
+  margin: 0 -0.25rem;
   padding: 1rem;
   background: $white;
   font-size: 0;
 }
 
 .c-nav__item {
+  position: relative;
   display: inline-block;
-  width: 49%;
+  width: 100%;
+  margin: 0 0.25rem;
   padding: 0.5rem 0.75rem;
   background: $lighterGray;
   font-size: 1rem;
+}
+
+.c-nav__item--nopadding {
+  padding: 0;
 }
 
 @media screen and (min-width: 48em) {
   .c-nav {
     display: block;
     position: fixed;
+    margin: 0;
     background: transparent;
   }
 
@@ -248,31 +265,66 @@ input[type="checkbox"] {
     background: $white;
     min-width: 10rem;
     width: auto;
-    margin-bottom: 1rem;
+    margin: 0 0 1rem;
   }
 }
 
 .c-languageselect {
+  position: relative;
+}
+
+.c-languageselect__select {
+  width: 100%;
   height: auto;
+  padding: 0.5rem 0.75rem;
+  background: transparent;
   border: none;
   border-radius: 0;
   user-select: none;
   appearance: none;
   cursor: pointer;
   font-family: inherit;
+  font-size: inherit;
   text-overflow: ellipsis;
-  color: $primary1;
+  color: $blue;
 }
 
-/*
-.c-helplink {
-  position: absolute;
-  top: 3.25rem;
-  right: ($content-padding*2 - 1rem);
+.c-languageselect__arrow {
+  z-index: 1;
   display: block;
-  padding: 1rem;
-}*/
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0.5625rem;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0.375rem 0.375rem 0 0.375rem;
+  border-color: $blue transparent transparent transparent;
+}
 
+.c-arrow {
+  stroke: $black;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+  transition: left 0.4s ease-in-out, right 0.4s ease-in-out;
+  right: 0;
+
+  a:hover > & {
+    right: -0.5rem;
+  }
+
+  &.c-arrow--left {
+    transform: rotate(180deg);
+    left: 0;
+
+    a:hover > & {
+      left: -0.5rem;
+      right: 0;
+    }
+  }
+}
 
 /**
  * States

@@ -18,7 +18,9 @@
         {$onManagerLoginFormPrerender}
 
         <nav class="c-nav">
-            <a href="#help" class="c-nav__item c-helplink">{$_lang.login_help_button_text}</a>
+            {if $show_help}
+                <a href="#help" class="c-nav__item c-helplink">{$_lang.login_help_button_text}</a>
+            {/if}
             <select name="manager_language" id="modx-login-language-select" class="c-nav__item c-languageselect" aria-label="{$_config.cultureKey}">
                 {foreach from=$languages item=language}
                     {assign var="native_language" value="language_native_{$language}"}
@@ -27,20 +29,25 @@
             </select>
         </nav>
 
-        <main class="l-content">
-            <img alt="MODX CMS/CMF" src="{$logo}" class="c-logo">
+        <div class="l-content">
+            <header class="l-header">
+                <img alt="MODX CMS/CMF" src="{$logo}" class="c-logo">
+            </header>
 
-            <div id="help" class="c-help">
-                <h2>{$_lang.login_help_title}</h2>
-                {$_lang.login_help_text}
-            </div>
+            <main class="l-main">
+                {if $show_help}
+                    <div id="help" class="c-help">
+                        <h2>{$_lang.login_help_title}</h2>
+                        {$_lang.login_help_text}
+                    </div>
+                {/if}
 
-            <h1>{$greeting}</h1>
+                <h1>{$greeting}</h1>
 
             {if !$_post.modhash}
-                <form id="modx-login-form" class="can-toggle {if $_post.username_reset|default}is-hidden{/if}" action="" method="post">
+                <form id="modx-login-form" class="c-form can-toggle {if $_post.username_reset|default}is-hidden{/if}" action="" method="post">
                     <input type="hidden" name="login_context" value="mgr">
-                    <input type="hidden" name="modhash" value="{$modahsh|default}">
+                    <input type="hidden" name="modhash" value="{$modhash|default}">
                     <input type="hidden" name="returnUrl" value="{$returnUrl}">
 
                     <p class="lead">{$_lang.login_note}</p>
@@ -69,7 +76,7 @@
                     <button class="c-button" id="modx-login-btn" name="login" type="submit" value="1">{$_lang.login_button}</button>
 
                     {if $allow_forgot_password|default}
-                        <button class="c-button c-button--outline" id="modx-fl-link" name="forgotpassword">{$_lang.login_forget_your_login}</button>
+                        <button class="c-button c-button--ghost" id="modx-fl-link" name="forgotpassword">{$_lang.login_forget_your_login}</button>
                     {/if}
                 </form>
 
@@ -116,6 +123,18 @@
             {/if}
 
         </main>
+        <footer class="l-footer">
+            <p>
+                <a href="#">
+                    <svg class="c-arrow c-arrow--left" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                        <g fill="none" stroke-width="1.5" stroke-linejoin="round" stroke-miterlimit="10">
+                            <path class="arrow-icon--arrow" d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98"></path>
+                        </g>
+                    </svg>
+                    Return to website
+                </a>
+            </p>
+        </footer>
 
         <div class="l-background" style="background-image:url({$background})"></div>
 

@@ -1103,6 +1103,15 @@ $settings['login_logo']->fromArray(array (
   'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
+$settings['login_help_button']= $xpdo->newObject('modSystemSetting');
+$settings['login_help_button']->fromArray(array (
+  'key' => 'login_help_button',
+  'value' => '',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'authentication',
+  'editedon' => null,
+), '', true, true);
 $settings['manager_theme']= $xpdo->newObject('modSystemSetting');
 $settings['manager_theme']->fromArray(array (
   'key' => 'manager_theme',
