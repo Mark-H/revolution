@@ -21,12 +21,14 @@
             {if $show_help}
                 <a href="#help" class="c-nav__item c-helplink">{$_lang.login_help_button_text}</a>
             {/if}
-            <form method="GET" class="c-languageselect c-nav__item c-nav__item--nopadding">
-                <span class="c-languageselect__arrow"></span>
-                <select name="cultureKey" id="modx-login-language-select" class="c-languageselect__select" aria-label="{$language_str}">
-                    {$languages|indent:20}
-                </select>
-            </form>
+            <div class="c-nav__item c-nav__item--nopadding">
+                <form method="get" class="c-languageselect">
+                    <span class="c-languageselect__arrow"></span>
+                    <select name="cultureKey" id="modx-login-language-select" class="c-languageselect__select" aria-label="{$language_str}">
+                        {$languages|indent:20}
+                    </select>
+                </form>
+            </div>
         </nav>
 
         <div class="l-content">

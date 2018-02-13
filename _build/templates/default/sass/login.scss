@@ -30,7 +30,7 @@ html {
   box-shadow: 0 0 0 0.125rem $blue !important;
 }
 
-body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+body, h1, h2, h3, h4, h5, h6, p, ol, ul, form {
   margin: 0;
   padding: 0;
   font-weight: normal;
@@ -138,11 +138,6 @@ a {
   margin-bottom: 3rem;
 }
 
-form {
-  padding: 0 1rem;
-  margin: 0 -1rem;
-}
-
 input {
   font-size: 1rem;
   padding: 1rem;
@@ -193,6 +188,11 @@ input[type="checkbox"] {
   }
 }
 
+.c-form {
+  padding: 0 1rem;
+  margin: 0 -1rem;
+}
+
 .c-button {
   display: block;
   width: 100%;
@@ -232,6 +232,7 @@ input[type="checkbox"] {
   position: static;
   top: 0;
   left: 30rem;
+  margin: 0 -0.25rem;
   padding: 1rem;
   background: $white;
   font-size: 0;
@@ -240,7 +241,8 @@ input[type="checkbox"] {
 .c-nav__item {
   position: relative;
   display: inline-block;
-  width: 49%;
+  width: 100%;
+  margin: 0 0.25rem;
   padding: 0.5rem 0.75rem;
   background: $lighterGray;
   font-size: 1rem;
@@ -254,6 +256,7 @@ input[type="checkbox"] {
   .c-nav {
     display: block;
     position: fixed;
+    margin: 0;
     background: transparent;
   }
 
@@ -262,7 +265,7 @@ input[type="checkbox"] {
     background: $white;
     min-width: 10rem;
     width: auto;
-    margin-bottom: 1rem;
+    margin: 0 0 1rem;
   }
 }
 
