@@ -85,9 +85,9 @@
                         {/if}
                     </form>
 
-                    {if $allow_forgot_password|default}
-                        <form action="" method="post" id="modx-forgot-login-form" class="c-form can-toggle {if NOT $_post.username_reset|default}is-hidden{/if}">
-                            <p class="lead">{$_lang.login_forget_your_login_note}</p>
+                {if $allow_forgot_password|default}
+                    <form action="" method="post" id="modx-forgot-login-form" class="can-toggle {if NOT $_post.username_reset|default}is-hidden{/if}">
+                        <p class="lead">{$_lang.login_forget_your_login_note}</p>
 
                             {if $error_message|default}
                                 <p class="is-error">{$error_message}</p>
@@ -100,15 +100,15 @@
 
                             <button class="c-button" name="forgotlogin" type="submit" value="1" id="modx-fl-btn">{$_lang.login_send_activation_email}</button>
 
-                            {if $allow_forgot_password|default}
-                                <button name="modx-fl-back-to-login-link" id="modx-fl-back-to-login-link" class="c-button c-button--ghost">{$_lang.login_back_to_login}</button>
-                            {/if}
-                        </form>
-                    {/if}
-                {else}
-                    <form action="" method="post" id="modx-new-password-form" class="c-form">
-                        <input type="hidden" name="modhash" value="{$_post.modhash|default}">
-                        <p class="lead">{$_lang.login_new_password_note}</p>
+                        {if $allow_forgot_password|default}
+                            <button name="modx-fl-back-to-login-link" id="modx-fl-back-to-login-link" class="c-button c-button--outline">{$_lang.login_back_to_login}</button>
+                        {/if}
+                    </form>
+                {/if}
+            {else}
+                <form action="" method="post" id="modx-new-password-form">
+                    <input type="hidden" name="modhash" value="{$_post.modhash|default}">
+                    <p class="lead">{$_lang.login_new_password_note}</p>
 
                         {if $error_message|default}
                             <p class="is-error">{$error_message}</p>
