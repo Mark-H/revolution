@@ -30,7 +30,7 @@ class SecurityLoginManagerController extends modManagerController {
     /**
      * Custom logic code here for setting placeholders, etc
      * @param array $scriptProperties
-     * @return mixed
+     * @return void
      */
     public function process(array $scriptProperties = array()) {
         $this->handleForgotLoginHash();
@@ -84,7 +84,6 @@ class SecurityLoginManagerController extends modManagerController {
 
     public function getLifetimeString($diff) {
         $this->modx->lexicon->load('filters');
-        $agoTS = array();
 
         $years = intval((floor($diff/31536000)));
         if ($years) $diff = $diff % 31536000;
@@ -140,7 +139,6 @@ class SecurityLoginManagerController extends modManagerController {
         $output = implode(', ',$ago);
         return $output;
     }
-
 
     /**
      * Determine and save the user cultureKey so it could be used across the whole manager
@@ -198,7 +196,6 @@ class SecurityLoginManagerController extends modManagerController {
             $this->setPlaceholder('allow_forgot_password',true);
         }
     }
-
 
     /**
      * Handle the forgot login hash, if existent

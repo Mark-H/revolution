@@ -44,98 +44,98 @@
 
                 <h1>{$greeting}</h1>
 
-            {if !$_post.modhash}
-                <form id="modx-login-form" class="c-form can-toggle {if $_post.username_reset|default}is-hidden{/if}" action="" method="post">
-                    <input type="hidden" name="login_context" value="mgr">
-                    <input type="hidden" name="modhash" value="{$modhash|default}">
-                    <input type="hidden" name="returnUrl" value="{$returnUrl}">
+                {if !$_post.modhash}
+                    <form id="modx-login-form" class="c-form can-toggle {if $_post.username_reset|default}is-hidden{/if}" action="" method="post">
+                        <input type="hidden" name="login_context" value="mgr">
+                        <input type="hidden" name="modhash" value="{$modhash|default}">
+                        <input type="hidden" name="returnUrl" value="{$returnUrl}">
 
-                    <p class="lead">{$_lang.login_note}</p>
-
-                    {if $error_message|default}
-                        <p class="is-error">{$error_message}</p>
-                    {/if}
-
-                    <label>
-                        {$_lang.login_username}
-                        <input type="text" id="modx-login-username" name="username" autocomplete="on" autofocus value="{$_post.username|default}" required>
-                    </label>
-
-                    <label>
-                        {$_lang.login_password}
-                        <input type="password" id="modx-login-password" name="password" autocomplete="on" required>
-                    </label>
-
-                    <label>
-                        <input type="checkbox" id="modx-login-rememberme" name="rememberme" autocomplete="on" {if $_post.rememberme|default}checked="checked"{/if} value="1">
-                        {$rememberme}
-                    </label>
-
-                    {$onManagerLoginFormRender}
-
-                    <button class="c-button" id="modx-login-btn" name="login" type="submit" value="1">{$_lang.login_button}</button>
-
-                    {if $allow_forgot_password|default}
-                        <button class="c-button c-button--ghost" id="modx-fl-link" name="forgotpassword">{$_lang.login_forget_your_login}</button>
-                    {/if}
-                </form>
-
-                {if $allow_forgot_password|default}
-                    <form action="" method="post" id="modx-forgot-login-form" class="can-toggle {if NOT $_post.username_reset|default}is-hidden{/if}">
-                        <p class="lead">{$_lang.login_forget_your_login_note}</p>
+                        <p class="lead">{$_lang.login_note}</p>
 
                         {if $error_message|default}
                             <p class="is-error">{$error_message}</p>
                         {/if}
 
                         <label>
-                            {$_lang.login_username_or_email}
-                            <input type="text" id="modx-login-username-reset" name="username_reset" value="{$_post.username_reset|default}">
+                            {$_lang.login_username}
+                            <input type="text" id="modx-login-username" name="username" autocomplete="on" autofocus value="{$_post.username|default}" required>
                         </label>
 
-                        <button class="c-button" name="forgotlogin" type="submit" value="1" id="modx-fl-btn">{$_lang.login_send_activation_email}</button>
+                        <label>
+                            {$_lang.login_password}
+                            <input type="password" id="modx-login-password" name="password" autocomplete="on" required>
+                        </label>
+
+                        <label>
+                            <input type="checkbox" id="modx-login-rememberme" name="rememberme" autocomplete="on" {if $_post.rememberme|default}checked="checked"{/if} value="1">
+                            {$rememberme}
+                        </label>
+
+                        {$onManagerLoginFormRender}
+
+                        <button class="c-button" id="modx-login-btn" name="login" type="submit" value="1">{$_lang.login_button}</button>
 
                         {if $allow_forgot_password|default}
-                            <button name="modx-fl-back-to-login-link" id="modx-fl-back-to-login-link" class="c-button c-button--outline">{$_lang.login_back_to_login}</button>
+                            <button class="c-button c-button--ghost" id="modx-fl-link" name="forgotpassword">{$_lang.login_forget_your_login}</button>
                         {/if}
                     </form>
-                {/if}
-            {else}
-                <form action="" method="post" id="modx-new-password-form">
-                    <input type="hidden" name="modhash" value="{$_post.modhash|default}">
-                    <p class="lead">{$_lang.login_new_password_note}</p>
 
-                    {if $error_message|default}
-                        <p class="is-error">{$error_message}</p>
+                    {if $allow_forgot_password|default}
+                        <form action="" method="post" id="modx-forgot-login-form" class="can-toggle {if NOT $_post.username_reset|default}is-hidden{/if}">
+                            <p class="lead">{$_lang.login_forget_your_login_note}</p>
+
+                            {if $error_message|default}
+                                <p class="is-error">{$error_message}</p>
+                            {/if}
+
+                            <label>
+                                {$_lang.login_username_or_email}
+                                <input type="text" id="modx-login-username-reset" name="username_reset" value="{$_post.username_reset|default}">
+                            </label>
+
+                            <button class="c-button" name="forgotlogin" type="submit" value="1" id="modx-fl-btn">{$_lang.login_send_activation_email}</button>
+
+                            {if $allow_forgot_password|default}
+                                <button name="modx-fl-back-to-login-link" id="modx-fl-back-to-login-link" class="c-button c-button--ghost">{$_lang.login_back_to_login}</button>
+                            {/if}
+                        </form>
                     {/if}
+                {else}
+                    <form action="" method="post" id="modx-new-password-form">
+                        <input type="hidden" name="modhash" value="{$_post.modhash|default}">
+                        <p class="lead">{$_lang.login_new_password_note}</p>
 
-                    <label>
-                        {$_lang.login_new_password}
-                        <input type="password" id="modx-login-specified-password" name="specifiedpassword" value="{$_post.specifiedpassword|default}" autofocus>
-                    </label>
-                    <label>
-                        {$_lang.login_confirm_password}
-                        <input type="password" id="modx-login-confirm-password" name="confirmpassword" value="{$_post.confirmpassword|default}">
-                    </label>
+                        {if $error_message|default}
+                            <p class="is-error">{$error_message}</p>
+                        {/if}
 
-                    <button class="c-button" name="login" type="submit" value="1">{$_lang.login_button}</button>
-                </form>
-            {/if}
+                        <label>
+                            {$_lang.login_new_password}
+                            <input type="password" id="modx-login-specified-password" name="specifiedpassword" value="{$_post.specifiedpassword|default}" autofocus>
+                        </label>
+                        <label>
+                            {$_lang.login_confirm_password}
+                            <input type="password" id="modx-login-confirm-password" name="confirmpassword" value="{$_post.confirmpassword|default}">
+                        </label>
 
-        </main>
-        <footer class="l-footer">
-            <p>
-                <a href="#">
-                    <svg class="c-arrow c-arrow--left" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                        <g fill="none" stroke-width="1.5" stroke-linejoin="round" stroke-miterlimit="10">
-                            <path class="arrow-icon--arrow" d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98"></path>
-                        </g>
-                    </svg>
-                    Return to website
-                </a>
-            </p>
-        </footer>
+                        <button class="c-button" name="login" type="submit" value="1">{$_lang.login_button}</button>
+                    </form>
+                {/if}
 
+            </main>
+            <footer class="l-footer">
+                <p>
+                    <a href="{$_config.site_url}">
+                        <svg class="c-arrow c-arrow--left" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                            <g fill="none" stroke-width="1.5" stroke-linejoin="round" stroke-miterlimit="10">
+                                <path class="arrow-icon--arrow" d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98"></path>
+                            </g>
+                        </svg>
+                        {$_lang.login_return_site}
+                    </a>
+                </p>
+            </footer>
+        </div>
         <div class="l-background" style="background-image:url({$background})"></div>
 
         <script src="{$_config.manager_url}assets/modext/sections/login.js" type="text/javascript"></script>
