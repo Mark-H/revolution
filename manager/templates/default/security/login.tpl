@@ -104,7 +104,7 @@
             </main>
             <footer class="l-footer">
                 <p>
-                    <a href="#">
+                    <a href="{$siteUrl}">
                         <svg class="c-arrow c-arrow--left" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                             <g fill="none" stroke-width="1.5" stroke-linejoin="round" stroke-miterlimit="10">
                                 <path class="arrow-icon--arrow" d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98"></path>

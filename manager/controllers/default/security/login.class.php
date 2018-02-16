@@ -67,6 +67,8 @@ class SecurityLoginManagerController extends modManagerController {
         $background = $this->modx->getOption('login_logo', null, $managerUrl . 'templates/default/images/modx-logo-color.svg', true);
         $this->setPlaceholder('logo', $background);
 
+        $this->setPlaceholder('siteUrl', $this->modx->getOption('site_url'));
+
         $this->setPlaceholder('show_help', (int)$this->modx->getOption('login_help_button'));
         $lifetime = $this->modx->getOption('session_cookie_lifetime', null, 0);
         $this->setPlaceholder('rememberme', $output = $this->modx->lexicon('login_remember', array('lifetime' => $this->getLifetimeString($lifetime))));
