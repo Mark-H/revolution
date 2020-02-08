@@ -18,7 +18,7 @@ class modDeprecatedMethod extends \MODX\Revolution\modDeprecatedMethod
         'fields' => 
         array (
             'definition' => '',
-            'message' => '',
+            'since' => '',
             'recommendation' => '',
         ),
         'fieldMeta' => 
@@ -31,10 +31,10 @@ class modDeprecatedMethod extends \MODX\Revolution\modDeprecatedMethod
                 'null' => false,
                 'default' => '',
             ),
-            'message' => 
+            'since' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '1024',
+                'precision' => '191',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
