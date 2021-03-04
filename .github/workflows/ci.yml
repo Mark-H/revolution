@@ -56,3 +56,6 @@ jobs:
 
       - name: Run PHPUnit
         run: core/vendor/bin/phpunit  --enforce-time-limit -c ./_build/test/phpunit.xml
+
+      - name: Building core
+        run: php _build/transport.core.php
