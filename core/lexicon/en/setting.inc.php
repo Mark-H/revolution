@@ -22,6 +22,7 @@ $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Session and Cookie';
 $_lang['area_static_elements'] = 'Static Elements';
+$_lang['area_static_resources'] = 'Static Resources';
 $_lang['area_lexicon_string'] = 'Area Lexicon Entry';
 $_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the area here. If there is no lexicon entry, it will just display the area key.<br />Core Areas: authentication, caching, file, furls, gateway, language, manager, session, site, system';
 $_lang['area_site'] = 'Site';
@@ -741,6 +742,15 @@ $_lang['setting_static_elements_default_category_desc'] = 'Specify a default cat
 
 $_lang['setting_static_elements_basepath'] = 'Static elements basepath';
 $_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
+
+$_lang['setting_resource_static_allow_absolute'] = 'Allow absolute static resource path';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'This setting enables users to enter a fully qualified absolute path to any readable file on the server as the content of a static resource. Important: enabling this setting may be considered a significant security risk! It\'s strongly recommended to use the media source integration for appropriate access control.';
+
+$_lang['setting_resource_static_path'] = 'Static resource base path';
+$_lang['setting_resource_static_path_desc'] = 'When not using the media source integration in static resources, the content of a static resource must be contained within the absolute path provided here. Important: setting this too wide may allow users to read files they shouldn\'t! It is strongly recommended to use the media source integration for appropriate access control, or to at least limit users with this setting to a specific directory such as {core_path}static/ or {assets_path}.';
+
+$_lang['setting_resource_static_source'] = 'Static resource media source';
+$_lang['setting_resource_static_source_desc'] = 'When set to any media source, the content of all static resources must be located within the media source. It is strongly recommended for security reasons to use a media source limited to a specific directory, as users may read any file within the media source otherwise.';
 
 $_lang['setting_strip_image_paths'] = 'Rewrite browser paths?';
 $_lang['setting_strip_image_paths_desc'] = 'If this is set to \'No\', MODX will write file browser resource src\'s (images, files, flash, etc.) as absolute URLs. Relative URLs are helpful should you wish to move your MODX install, e.g., from a staging site to a production site. If you have no idea what this means, it\'s best just to leave it set to \'Yes\'.';
