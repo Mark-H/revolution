@@ -43,6 +43,6 @@ jobs:
             - uses: thenabeel/action-phpcs@v8
               with:
                   files: "**.php"
-                  phpcs_path: core/vendor/bin/phpcs
+                  phpcs_path: "core/vendor/bin/phpcs"
                   standard: phpcs.xml
                   fail_on_warnings: false
