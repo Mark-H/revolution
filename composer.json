@@ -110,6 +110,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require-dev": {
-        "yoast/phpunit-polyfills": "^0.2.0"
+        "yoast/phpunit-polyfills": "^0.2.0",
+        "phpcompatibility/php-compatibility": "*"
     }
 }
