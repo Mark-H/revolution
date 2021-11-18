@@ -14,7 +14,6 @@
 
     <!-- Show progress, show the error codes for each message (source). -->
     <arg value="ps" />
-    <arg value="version" />
     <arg name="extensions" value="php,inc" />
     <config name="ignore_warnings_on_exit" value="1" />
 
