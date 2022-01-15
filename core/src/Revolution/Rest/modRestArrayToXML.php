@@ -33,11 +33,6 @@ class modRestArrayToXML
      */
     public static function toXML($data, $rootNodeName = 'ResultSet', &$xml = null)
     {
-
-        // turn off compatibility mode as simple xml throws a wobbly if you don't.
-        if (ini_get('zend.ze1_compatibility_mode') == 1) {
-            ini_set('zend.ze1_compatibility_mode', 0);
-        }
         if (is_null($xml)) {
             $xml = simplexml_load_string('<?xml version="1.0" encoding="UTF-8" standalone="yes"?><' . $rootNodeName . '></' . $rootNodeName . '>');
         }
