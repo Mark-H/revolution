@@ -294,12 +294,6 @@ class modX extends xPDO {
      * @static
      */
     public static function protect() {
-        if (@ ini_get('register_globals') && isset ($_REQUEST)) {
-            foreach ($_REQUEST as $key => $value) {
-                $GLOBALS[$key] = null;
-                unset ($GLOBALS[$key]);
-            }
-        }
         $targets= ['PHP_SELF', 'HTTP_USER_AGENT', 'HTTP_REFERER', 'QUERY_STRING'];
         foreach ($targets as $target) {
             $_SERVER[$target] = isset ($_SERVER[$target]) ? htmlspecialchars($_SERVER[$target], ENT_QUOTES) : null;
@@ -345,11 +339,7 @@ class modX extends xPDO {
                         $iteration++;
                     }
                 }
-                if (version_compare(PHP_VERSION, '7.4.0', '<') && get_magic_quotes_gpc()) {
-                    $target[$key]= stripslashes($value);
-                } else {
-                    $target[$key]= $value;
-                }
+                $target[$key] = $value;
             }
         }
         return $target;

@@ -23,7 +23,7 @@ class modLinkTag extends modTag
      * Overrides modTag::__construct to set the Link Tag token
      * {@inheritdoc}
      */
-    function __constructor(modX & $modx)
+    function __construct(modX & $modx)
     {
         parent:: __construct($modx);
         $this->setToken('~');

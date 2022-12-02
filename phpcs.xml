@@ -14,15 +14,21 @@
 
     <!-- Show progress, show the error codes for each message (source). -->
     <arg value="ps" />
+    <arg name="extensions" value="php,inc" />
+    <config name="ignore_warnings_on_exit" value="1" />
 
     <!-- Ignore vendor files -->
     <exclude-pattern>*/vendor/*</exclude-pattern>
     <!-- Ignore generated model files -->
     <exclude-pattern>*/mysql/*.php</exclude-pattern>
 
-    <!-- Our base rule: set to PSR12-->
-    <rule ref="PSR12" />
+    <!-- Use PSR12 as code standard -->
     <rule ref="PSR12">
         <exclude name="Squiz.Classes.ValidClassName.NotCamelCaps"/>
     </rule>
+
+    <!-- Test PHP compatibility for 7.2 and up -->
+    <config name="installed_paths" value="core/vendor/phpcompatibility/php-compatibility" />
+    <config name="testVersion" value="7.2-" />
+    <rule ref="PHPCompatibility"/>
 </ruleset>
