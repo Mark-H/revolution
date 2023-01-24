@@ -46,7 +46,10 @@
         }
     ],
     "config": {
-        "vendor-dir": "core/vendor"
+        "vendor-dir": "core/vendor",
+        "platform": {
+            "php": "7.2.5"
+        }
     },
     "require": {
         "php": ">=7.2.5",
